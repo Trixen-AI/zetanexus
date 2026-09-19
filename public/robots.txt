@@ -1,0 +1,8 @@
+# ZetaNexus - https://z2r-nexus.com
+User-agent: *
+Allow: /
+# Merchant dashboard and customer payment links are private surfaces.
+Disallow: /app
+Disallow: /pay/
+
+Sitemap: https://z2r-nexus.com/sitemap.xml

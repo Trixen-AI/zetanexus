@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ZetaNexus | Shielded ZEC Checkout, Settled on Robinhood Chain</title>
+    <meta
+      name="description"
+      content="Accept shielded ZEC payments and settle every order on Robinhood Chain. Single-use shielded addresses, live quotes and payouts you can verify onchain."
+    />
+    <link rel="canonical" href="https://z2r-nexus.com/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="author" content="ZetaNexus" />
+    <meta name="application-name" content="ZetaNexus" />
+    <meta name="theme-color" content="#fafaf9" />
+    <meta name="color-scheme" content="light" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Icons -->
+    <link rel="icon" type="image/svg+xml" href="/brand/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/brand/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/brand/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ZetaNexus" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://z2r-nexus.com/" />
+    <meta property="og:title" content="ZetaNexus | Private ZEC in. Onchain settlement out." />
+    <meta
+      property="og:description"
+      content="Accept shielded ZEC payments. Settle merchant orders on Robinhood Chain, with a payout hash you can hand to an auditor."
+    />
+    <meta property="og:image" content="https://z2r-nexus.com/brand/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ZetaNexus: Private ZEC in. Onchain settlement out." />
+
+    <!-- X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@ZetaNexus_" />
+    <meta name="twitter:creator" content="@ZetaNexus_" />
+    <meta name="twitter:title" content="ZetaNexus | Private ZEC in. Onchain settlement out." />
+    <meta
+      name="twitter:description"
+      content="Accept shielded ZEC payments and settle merchant orders on Robinhood Chain."
+    />
+    <meta name="twitter:image" content="https://z2r-nexus.com/brand/og-image.png" />
+    <meta name="twitter:image:alt" content="ZetaNexus: Private ZEC in. Onchain settlement out." />
+
+    <!-- The live ZEC price loads on first paint -->
+    <link rel="preconnect" href="https://api.coingecko.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.coinbase.com" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://z2r-nexus.com/#organization",
+            "name": "ZetaNexus",
+            "url": "https://z2r-nexus.com/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://z2r-nexus.com/brand/logo-500.png",
+              "width": 500,
+              "height": 500
+            },
+            "sameAs": ["https://x.com/ZetaNexus_"]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://z2r-nexus.com/#website",
+            "url": "https://z2r-nexus.com/",
+            "name": "ZetaNexus",
+            "description": "Shielded ZEC checkout with merchant settlement on Robinhood Chain.",
+            "publisher": { "@id": "https://z2r-nexus.com/#organization" },
+            "inLanguage": "en"
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://z2r-nexus.com/#app",
+            "name": "ZetaNexus",
+            "url": "https://z2r-nexus.com/app",
+            "applicationCategory": "FinanceApplication",
+            "operatingSystem": "Web",
+            "description": "Merchant dashboard for shielded ZEC checkouts: live quotes, onchain settlement tracking on Robinhood Chain, reconciliation and signed webhooks.",
+            "publisher": { "@id": "https://z2r-nexus.com/#organization" }
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Shown to crawlers and no-JS visitors; React replaces it on load. -->
+      <main style="max-width: 720px; margin: 64px auto; padding: 0 16px; font-family: system-ui, sans-serif; color: #0d0f12">
+        <h1>ZetaNexus: Private ZEC in. Onchain settlement out.</h1>
+        <p>
+          Accept shielded ZEC payments. Settle merchant orders on Robinhood Chain. Your customer keeps the privacy of the Zcash
+          shielded pool, and you keep a settlement hash you can hand to an auditor.
+        </p>
+        <h2>How it works</h2>
+        <ol>
+          <li>Create a quote: a live ZEC price, a single-use shielded address and a 15 minute expiry.</li>
+          <li>Receive ZEC: sender, amount and memo stay encrypted on the Zcash blockchain.</li>
+          <li>Verify settlement: the payout lands on Robinhood Chain as a public, verifiable transaction.</li>
+        </ol>
+        <p><a href="/app">Open the merchant dashboard</a> · <a href="https://x.com/ZetaNexus_">ZetaNexus on X</a></p>
+        <noscript><p>ZetaNexus needs JavaScript for live prices and the dashboard.</p></noscript>
+      </main>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

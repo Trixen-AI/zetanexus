@@ -1,0 +1,65 @@
+# Netlify configuration for ZetaNexus (https://z2r-nexus.com)
+#
+# Environment variables are set in Netlify, not here (Site configuration >
+# Environment variables). They are read at build time, so redeploy after changing them:
+#   VITE_REOWN_PROJECT_ID   required  Reown AppKit project id (wallet connect modal)
+#   VITE_ZETANEXUS_API_URL  optional  checkout API that issues shielded ZEC addresses
+#   VITE_RHC_RPC_URL        optional  Robinhood Chain RPC (defaults to the public endpoint)
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# One canonical host: www and the Netlify subdomain redirect to the apex domain.
+[[redirects]]
+  from = "https://www.z2r-nexus.com/*"
+  to = "https://z2r-nexus.com/:splat"
+  status = 301
+  force = true
+
+# Client-side routes (/app/*, /pay/*): serve the app shell, React Router takes over.
+# Real files in dist/ (assets, robots.txt, sitemap.xml, brand/*) are served first.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+# Hashed build output never changes under the same name: cache it for a year.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/brand/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# The dashboard and customer payment links are private surfaces: keep them out of search.
+[[headers]]
+  for = "/app/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/app"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+[[headers]]
+  for = "/pay/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Referrer-Policy = "no-referrer"

@@ -1,0 +1,304 @@
+/* ==========================================================================
+   Shared structural devices. These repeat across sections, so they are built
+   once here: container, panel/frame, card, eyebrow, button, data row, chip.
+   ========================================================================== */
+
+/* --- layout --------------------------------------------------------------- */
+.page {
+  position: relative;
+  overflow: clip;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-sides);
+}
+
+.section {
+  position: relative;
+}
+
+.pt-xs { padding-top: var(--section-xsmall); }
+.pt-sm { padding-top: var(--section-medium); }
+.pt-md { padding-top: var(--section-big); }
+.pt-lg { padding-top: var(--section-default); }
+.pb-xs { padding-bottom: var(--section-xsmall); }
+.pb-sm { padding-bottom: var(--section-medium); }
+.pb-md { padding-bottom: var(--section-big); }
+.pb-lg { padding-bottom: var(--section-default); }
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- eyebrow -------------------------------------------------------------- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-tiny);
+  font-family: var(--font-mono);
+  font-size: var(--fs-p-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.eyebrow-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-small);
+  width: 100%;
+}
+
+.eyebrow-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* --- headings + copy ------------------------------------------------------ */
+.lede {
+  font-size: var(--fs-p-big);
+  line-height: 1.45;
+  color: var(--ink-op-64);
+  max-width: 62ch;
+}
+
+.body-copy {
+  font-size: var(--fs-p);
+  line-height: 1.5;
+  color: var(--ink-op-64);
+}
+
+.head-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-normal);
+  text-align: center;
+}
+
+.head-center h2 {
+  max-width: 17ch;
+}
+
+.head-center .lede {
+  max-width: 54ch;
+}
+
+/* --- buttons -------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-tiny);
+  font-size: var(--fs-p-small);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: background-color 0.24s var(--ease-soft), color 0.24s var(--ease-soft),
+    border-color 0.24s var(--ease-soft), transform 0.24s var(--ease-out);
+}
+
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--ink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+.btn--ink:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
+
+.btn--brand {
+  background: var(--shield);
+  border-color: var(--shield);
+  color: var(--white);
+}
+.btn--brand:hover { background: #5b43e6; border-color: #5b43e6; }
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--ink);
+}
+.btn--ghost:hover { border-color: var(--ink); background: rgba(13, 15, 18, 0.04); }
+
+.btn--onDark {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--ink);
+}
+.btn--onDark:hover { background: #e9e9e4; border-color: #e9e9e4; }
+
+.btn--ghostDark {
+  background: transparent;
+  border-color: var(--white-op-36);
+  color: var(--white);
+}
+.btn--ghostDark:hover { border-color: var(--white); background: var(--white-op-12); }
+
+.btn--sm { padding: 7px 12px; font-size: var(--fs-p-tiny); }
+
+.btn-arrow { font-size: 0.85em; line-height: 1; translate: 0 -1px; }
+
+/* --- panels + cards ------------------------------------------------------- */
+.panel {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.panel--surface { background: var(--surface); }
+.panel--ink { background: var(--ink); color: var(--white); }
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.card--flush {
+  background: var(--surface-2);
+  border-color: transparent;
+}
+
+/* mini product-UI mock used inside cards */
+.mock {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tiny);
+  padding: var(--pad-small);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xsmall);
+}
+
+.mock-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-small);
+}
+
+.mock-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.mock-value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-p-small);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.mock-value--lg {
+  font-size: 26px;
+  letter-spacing: -0.02em;
+}
+
+/* --- chips ---------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-round);
+  background: var(--white);
+  font-family: var(--font-mono);
+  font-size: var(--fs-p-tiny);
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.chip--shield { border-color: rgba(110, 86, 248, 0.32); background: var(--shield-wash); color: #4b34d6; }
+.chip--settle { border-color: rgba(18, 201, 126, 0.32); background: var(--settle-wash); color: #0b8c57; }
+.chip--signal { border-color: rgba(255, 176, 32, 0.4); background: var(--signal-wash); color: #96620a; }
+.chip--dark { background: var(--white-op-12); border-color: var(--white-op-36); color: var(--white); }
+
+/* Asset chips carry official marks. They are sized so a mark reads at a glance:
+   18px icons, 34px chip height, same height for every chip in a row. */
+.chip--asset,
+.chip--rhc {
+  height: 34px;
+  padding: 0 12px 0 8px;
+  gap: 8px;
+  font-size: var(--fs-p-small);
+  color: var(--ink);
+}
+
+.chip--asset svg { flex: none; }
+
+/* Robinhood publishes its Chain logo in white only, so it always sits on ink. */
+.chip--rhc {
+  padding: 0 14px;
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.chip--rhc svg { display: block; }
+
+.chip-price { font-size: var(--fs-p-small); color: var(--ink); }
+.chip-change { font-size: 11px; }
+.chip-change.is-up { color: #0b8c57; }
+.chip-change.is-down { color: var(--alert); }
+.chip-live-dot { color: var(--settle); }
+
+/* status dot */
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+.dot--pulse {
+  animation: dot-pulse 2s var(--ease-soft) infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* --- hairline rule -------------------------------------------------------- */
+.rule {
+  height: 1px;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+}
+
+/* --- scroll reveal -------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; }
+}
