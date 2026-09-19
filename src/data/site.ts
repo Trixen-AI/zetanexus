@@ -7,6 +7,13 @@ export const BRAND = {
     'ZetaNexus takes shielded ZEC at checkout and settles the merchant payout on Robinhood Chain.',
 };
 
+/** The ZNX token contract on Robinhood Chain (verified on-chain: ZetaNexus / ZNX, 18 decimals). */
+export const TOKEN = {
+  symbol: 'ZNX',
+  contract: '0xa76f958355d82f698e8535e1d8f51482204d2b67',
+  explorer: 'https://robinhoodchain.blockscout.com/token/0xa76f958355d82f698e8535e1d8f51482204d2b67',
+};
+
 /** The demo merchant used in every example on the page. */
 export const DEMO = {
   merchant: 'ZetaNexus Demo Store',

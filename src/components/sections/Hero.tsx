@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { RailField } from '../ui/RailField';
 import { AssetChip, ZcashMark } from '../ui/AssetMarks';
-import { IconArrowRight, IconChevronDown } from '../ui/Icons';
-import { HERO } from '../../data/site';
+import { IconArrowRight, IconArrowUpRight, IconCheck, IconChevronDown, IconCopy } from '../ui/Icons';
+import { HERO, TOKEN } from '../../data/site';
 import { formatUsd, useZecPrice } from '../../lib/zecPrice';
 
 function LiveZecChip() {
@@ -21,6 +22,40 @@ function LiveZecChip() {
       )}
       {price.status === 'live' && <i className="dot dot--pulse chip-live-dot" aria-label="live" />}
     </span>
+  );
+}
+
+function ContractRow() {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(TOKEN.contract);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1600);
+    } catch {
+      /* clipboard blocked; the address is on screen */
+    }
+  };
+  const short = `${TOKEN.contract.slice(0, 8)}...${TOKEN.contract.slice(-6)}`;
+  return (
+    <div className="hero-ca">
+      <span className="hero-ca-key">
+        CA <span className="hero-ca-symbol">${TOKEN.symbol}</span>
+      </span>
+      <button type="button" className="hero-ca-value num" onClick={copy} title="Copy contract address" aria-label={`Copy contract address ${TOKEN.contract}`}>
+        <span className="hero-ca-full">{TOKEN.contract}</span>
+        <span className="hero-ca-short">{short}</span>
+        {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
+      </button>
+      <a className="hero-ca-link" href={TOKEN.explorer} target="_blank" rel="noopener noreferrer" aria-label="View ZNX on Blockscout">
+        <IconArrowUpRight size={14} />
+      </a>
+      {copied ? (
+        <span className="hero-ca-toast" role="status">
+          Copied
+        </span>
+      ) : null}
+    </div>
   );
 }
 
@@ -61,6 +96,10 @@ export function Hero() {
                 <AssetChip symbol="USDC" />
               </li>
             </ul>
+
+            <div className="reveal">
+              <ContractRow />
+            </div>
           </div>
 
           <div className="hero-foot">
