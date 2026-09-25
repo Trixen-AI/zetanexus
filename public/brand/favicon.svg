@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="64" height="64">
-  <path d="M8 0H40L48 8V40L40 48H8L0 40V8Z" fill="#171718" />
-  <path d="M8.3 0.75H39.7L47.25 8.3V39.7L39.7 47.25H8.3L0.75 39.7V8.3Z" fill="none" stroke="#323232" stroke-width="1.5" />
-  <g fill="none" stroke-width="5" stroke-linejoin="miter">
-    <path d="M27 25L40 14" stroke="#71cfa3" />
-    <path d="M30 22.46L40 34" stroke="#f98500" />
-    <path d="M8 14H19L8 34H19" stroke="#ffffff" stroke-linecap="square" />
-    <path d="M27 14V34" stroke="#ffffff" stroke-linecap="square" />
+  <path d="M8 0H40A8 8 0 0 1 48 8V40A8 8 0 0 1 40 48H8A8 8 0 0 1 0 40V8A8 8 0 0 1 8 0Z" fill="#ffd209" />
+  <path d="M9 35V22A15 15 0 0 1 39 22V35Z" fill="#000000" />
+  <circle cx="24" cy="24" r="3.2" fill="#ffd209" />
+  <g fill="none" stroke="#000000" stroke-linecap="butt">
+    <path d="M19.5 35L12 46.6M28.5 35L36 46.6" stroke-width="3.6" />
+    <path d="M16 40H32M13 44.8H35" stroke-width="2.88" />
   </g>
 </svg>

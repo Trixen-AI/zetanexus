@@ -11,7 +11,7 @@ function EsimArt() {
       <g transform="translate(38 26)">
         {cells.map((on, i) => (on ? <rect key={i} x={(i % 4) * 9} y={Math.floor(i / 4) * 9} width="7" height="7" fill="var(--verdigris)" /> : null))}
       </g>
-      <path d="M86 40h24M104 34l6 6-6 6" stroke="var(--sodium)" strokeWidth="1.5" fill="none" />
+      <path d="M86 40h24M104 34l6 6-6 6" stroke="var(--settle-deep)" strokeWidth="1.5" fill="none" />
     </svg>
   );
 }

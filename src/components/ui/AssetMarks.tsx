@@ -19,9 +19,9 @@
  *                    shown on a dark chip rather than recoloured.
  */
 
-// Default is the official white brandmark (z.cash/press, Brandmark-White.svg, fill #fff):
-// the site is dark, so the black variant would disappear.
-export function ZcashMark({ size = 18, color = '#ffffff' }: { size?: number; color?: string }) {
+// Default is the official black brandmark (z.cash/press, Brandmark-Black.svg, fill #000):
+// the site is light, so the white variant would disappear.
+export function ZcashMark({ size = 18, color = '#000000' }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="270 270 540 540" aria-hidden="true" focusable="false">
       <path

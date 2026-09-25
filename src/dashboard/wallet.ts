@@ -34,10 +34,10 @@ if (walletReady) {
       icons: [`${window.location.origin}/brand/logo-mark-500.png`],
     },
     features: { analytics: false, email: false, socials: false, swaps: false, onramp: false },
-    themeMode: 'dark',
+    themeMode: 'light',
     themeVariables: {
-      '--w3m-accent': '#f98500',
-      '--w3m-color-mix': '#0a0a0b',
+      '--w3m-accent': '#000000',
+      '--w3m-color-mix': '#f2efec',
       '--w3m-color-mix-strength': 4,
       '--w3m-font-family': '"Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif',
       '--w3m-border-radius-master': '2px',

@@ -1,17 +1,17 @@
 /**
  * Builds the ZKRail brand files from one source.
  *
- * Mark : a "ZK" monogram laid as a rail junction on a square-cut tile (the same
- *        notched corner the UI uses on its ticket panels). The Z and the K's stem
- *        are the rail itself, in white. The K's two arms are the fork where one
- *        payment splits: the upper arm is mint, the shielded ZEC leg; the lower
- *        arm branches off it in orange, the leg that settles in public.
+ * Mark : a rail leaving a tunnel. The black portal is the shade, where the ZEC
+ *        payment travels shielded; one yellow lamp inside shows something is
+ *        moving there without showing what. The track runs out of the portal into
+ *        the yellow daylight of the tile: the leg that settles in the open.
  * Word : "ZKRail" in Bricolage Grotesque 700, outlined to <path>s.
- * Colour: the zats.market palette in src/styles/tokens.css.
+ * Colour: the zama.org palette in src/styles/tokens.css (yellow, black, warm grey).
  *
  * Keep the geometry here in step with src/brand/Logo.tsx.
  *
- * Outputs (public/brand): logo.svg, logo-light.svg, logo-500.png,
+ * Outputs (public/brand): logo.svg (on white), logo-light.svg (transparent, black
+ *   word), logo-dark.svg (transparent, white word), logo-500.png,
  *   logo-500-transparent.png, logo-mark.svg, logo-mark-500.png, favicon.svg,
  *   favicon-32.png, apple-touch-icon.png, icon-192.png, icon-512.png, og-image.png
  * and src/brand/logo-paths.ts
@@ -27,31 +27,24 @@ const out = (f) => resolve(root, 'public/brand', f);
 mkdirSync(resolve(root, 'public/brand'), { recursive: true });
 
 /* --- palette (kept in step with src/styles/tokens.css) -------------------- */
-const NIGHT = '#0a0a0b'; // black
-const PANEL = '#171718';
-const GRAPHITE = '#323232';
+const YELLOW = '#ffd209'; // Zama yellow
+const ORANGE = '#ffb243'; // Zama orange
+const BLACK = '#000000';
 const WHITE = '#ffffff';
-const GREY = '#999999';
-const ORANGE = '#f98500';
-const MINT = '#71cfa3';
+const WARM = '#f2efec'; // warm grey
+const MUTE = '#676462'; // black at 64% on white
 
 /* --- 1. the mark, on a 48x48 grid ----------------------------------------- */
-const TILE = 'M8 0H40L48 8V40L40 48H8L0 40V8Z';
-const EDGE = 'M8.3 0.75H39.7L47.25 8.3V39.7L39.7 47.25H8.3L0.75 39.7V8.3Z';
-const mark = ({ tile, edge, ink, shield, pub }, { sw = 4.4 } = {}) => `
-  <path d="${TILE}" fill="${tile}" />
-  <path d="${EDGE}" fill="none" stroke="${edge}" stroke-width="1.5" />
-  <g fill="none" stroke-width="${sw}" stroke-linejoin="miter">
-    <path d="M27 25L40 14" stroke="${shield}" />
-    <path d="M30 22.46L40 34" stroke="${pub}" />
-    <path d="M8 14H19L8 34H19" stroke="${ink}" stroke-linecap="square" />
-    <path d="M27 14V34" stroke="${ink}" stroke-linecap="square" />
+const TILE = 'M8 0H40A8 8 0 0 1 48 8V40A8 8 0 0 1 40 48H8A8 8 0 0 1 0 40V8A8 8 0 0 1 8 0Z';
+const PORTAL = 'M9 35V22A15 15 0 0 1 39 22V35Z';
+const mark = ({ sw = 3 } = {}) => `
+  <path d="${TILE}" fill="${YELLOW}" />
+  <path d="${PORTAL}" fill="${BLACK}" />
+  <circle cx="24" cy="24" r="3.2" fill="${YELLOW}" />
+  <g fill="none" stroke="${BLACK}" stroke-linecap="butt">
+    <path d="M19.5 35L12 46.6M28.5 35L36 46.6" stroke-width="${sw}" />
+    <path d="M16 40H32M13 44.8H35" stroke-width="${(sw * 0.8).toFixed(2)}" />
   </g>`;
-
-// The tile is always dark, so the mark reads the same on light and dark pages;
-// only the wordmark flips for the light variant.
-const onDark = { tile: PANEL, edge: GRAPHITE, ink: WHITE, shield: MINT, pub: ORANGE, word: WHITE };
-const onLight = { ...onDark, word: NIGHT };
 
 /* --- 2. the wordmark ------------------------------------------------------ */
 const FONT_FILES = [400, 600, 700].map((w) => resolve(root, `scripts/fonts/Bricolage-${w}.ttf`));
@@ -60,6 +53,7 @@ function loadFont(w) {
   return opentype.parse(b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength));
 }
 const bold = loadFont(700);
+const semi = loadFont(600);
 const SIZE = 100;
 const TRACK = -0.03;
 
@@ -88,11 +82,11 @@ const lockW = wordX + word.width;
 const pad = capHeight * 0.18;
 const lockH = Math.max(markSize, capHeight + descender) + pad * 2;
 
-function lockupBody(colors) {
+function lockupBody(wordColor) {
   const markY = (lockH - markSize) / 2;
   const baseline = markY + markSize / 2 + capHeight / 2;
-  return `<g transform="translate(${pad.toFixed(2)} ${markY.toFixed(2)}) scale(${markScale.toFixed(4)})">${mark(colors)}</g>
-  <g transform="translate(${(pad + wordX).toFixed(2)} ${baseline.toFixed(2)})" fill="${colors.word}">${word.glyphs
+  return `<g transform="translate(${pad.toFixed(2)} ${markY.toFixed(2)}) scale(${markScale.toFixed(4)})">${mark()}</g>
+  <g transform="translate(${(pad + wordX).toFixed(2)} ${baseline.toFixed(2)})" fill="${wordColor}">${word.glyphs
     .map((d) => `<path d="${d}"/>`)
     .join('')}</g>`;
 }
@@ -102,8 +96,9 @@ const svgDoc = (body, bg) =>
   ${bg ? `<rect width="100%" height="100%" fill="${bg}"/>` : ''}${body}
 </svg>\n`;
 
-writeFileSync(out('logo.svg'), svgDoc(lockupBody(onDark), NIGHT));
-writeFileSync(out('logo-light.svg'), svgDoc(lockupBody(onLight)));
+writeFileSync(out('logo.svg'), svgDoc(lockupBody(BLACK), WHITE));
+writeFileSync(out('logo-light.svg'), svgDoc(lockupBody(BLACK)));
+writeFileSync(out('logo-dark.svg'), svgDoc(lockupBody(WHITE)));
 
 /* --- 4. 500x500 exports --------------------------------------------------- */
 const png = (svg, width, fonts = false) =>
@@ -114,30 +109,30 @@ const png = (svg, width, fonts = false) =>
     .render()
     .asPng();
 
-function square(colors, bg) {
+function square(wordColor, bg) {
   const scale = (500 * 0.76) / lockupW;
   const x = (500 - lockupW * scale) / 2;
   const y = (500 - lockH * scale) / 2;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
-${bg ? `<rect width="500" height="500" fill="${bg}"/>` : ''}<g transform="translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${scale.toFixed(4)})">${lockupBody(colors)}</g></svg>`;
+${bg ? `<rect width="500" height="500" fill="${bg}"/>` : ''}<g transform="translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${scale.toFixed(4)})">${lockupBody(wordColor)}</g></svg>`;
 }
-writeFileSync(out('logo-500.png'), png(square(onDark, NIGHT), 500));
-writeFileSync(out('logo-500-transparent.png'), png(square(onDark, null), 500));
+writeFileSync(out('logo-500.png'), png(square(BLACK, WHITE), 500));
+writeFileSync(out('logo-500-transparent.png'), png(square(BLACK, null), 500));
 
-// mark only, for avatars (X crops to a circle): 60% width keeps the corners inside it
+// mark only, for avatars (X crops to a circle): 64% width keeps the tile inside it
 {
-  const w = 500 * 0.6;
+  const w = 500 * 0.64;
   const s = w / 48;
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 500 500">
-  <rect width="500" height="500" fill="${NIGHT}"/>
-  <g transform="translate(${((500 - w) / 2).toFixed(2)} ${((500 - w) / 2).toFixed(2)}) scale(${s.toFixed(4)})">${mark(onDark)}</g>
+  <rect width="500" height="500" fill="${WHITE}"/>
+  <g transform="translate(${((500 - w) / 2).toFixed(2)} ${((500 - w) / 2).toFixed(2)}) scale(${s.toFixed(4)})">${mark()}</g>
 </svg>`;
   writeFileSync(out('logo-mark.svg'), `${svg}\n`);
   writeFileSync(out('logo-mark-500.png'), png(svg, 500));
 }
 
-/* --- 5. favicon + app icons: the tile fills the icon, strokes a touch heavier for 16px */
-const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="${size}" height="${size}">${mark(onDark, { sw: 5 })}
+/* --- 5. favicon + app icons: the tile is the icon, rails a touch heavier for 16px */
+const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="${size}" height="${size}">${mark({ sw: 3.6 })}
 </svg>`;
 writeFileSync(out('favicon.svg'), `${iconSvg(64)}\n`);
 writeFileSync(out('favicon-32.png'), png(iconSvg(32), 32));
@@ -156,7 +151,7 @@ writeFileSync(
     `export const WORDMARK_DESCENDER = ${descender};\n`,
 );
 
-/* --- 7. social card (1200x630) -------------------------------------------- */
+/* --- 7. social card (1200x630), light like zama.org ----------------------- */
 {
   const W = 1200;
   const H = 630;
@@ -165,30 +160,35 @@ writeFileSync(
   const text = (t, x, y, size, weight, track, fill) =>
     `<text x="${x}" y="${y}" font-family="Bricolage Grotesque" font-size="${size}" font-weight="${weight}" letter-spacing="${(size * track).toFixed(2)}" fill="${fill}">${esc(t)}</text>`;
 
+  // yellow marker behind the last headline line, measured from the same font
+  const earn = 'Earn it back in zZEC.';
+  const earnW = [...earn].reduce((w, ch) => w + (semi.charToGlyph(ch).advanceWidth / semi.unitsPerEm) * 60 + 60 * -0.03, 0);
+
   const lockScale = 330 / lockupW;
   let rails = '';
   for (let i = 0; i < 6; i += 1) {
     const y = 150 + i * 70;
-    rails += `<path d="M820 ${y}H990" stroke="${MINT}" stroke-opacity="0.7" stroke-width="3" stroke-dasharray="14 10"/>`;
-    rails += `<path d="M990 ${y}H1200" stroke="${WHITE}" stroke-opacity="0.3" stroke-width="3"/>`;
-    rails += `<circle cx="${1040 + ((i * 53) % 140)}" cy="${y}" r="6" fill="${ORANGE}"/>`;
+    rails += `<path d="M820 ${y}H990" stroke="${BLACK}" stroke-opacity="0.35" stroke-width="3" stroke-dasharray="14 10"/>`;
+    rails += `<path d="M990 ${y}H1200" stroke="${BLACK}" stroke-opacity="0.18" stroke-width="3"/>`;
+    rails += `<circle cx="${1040 + ((i * 53) % 140)}" cy="${y}" r="7" fill="${YELLOW}" stroke="${BLACK}" stroke-opacity="0.6" stroke-width="2"/>`;
   }
   const og = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <radialGradient id="lamp" cx="0.82" cy="0.18" r="0.7"><stop offset="0" stop-color="${ORANGE}" stop-opacity="0.24"/><stop offset="1" stop-color="${ORANGE}" stop-opacity="0"/></radialGradient>
-    <radialGradient id="shade" cx="0.1" cy="0.95" r="0.7"><stop offset="0" stop-color="${MINT}" stop-opacity="0.14"/><stop offset="1" stop-color="${MINT}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="sun" cx="0.1" cy="0.08" r="0.75"><stop offset="0" stop-color="${YELLOW}" stop-opacity="0.55"/><stop offset="1" stop-color="${YELLOW}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow" cx="0.88" cy="0.9" r="0.6"><stop offset="0" stop-color="${ORANGE}" stop-opacity="0.4"/><stop offset="1" stop-color="${ORANGE}" stop-opacity="0"/></radialGradient>
   </defs>
-  <rect width="${W}" height="${H}" fill="${NIGHT}"/>
-  <rect width="${W}" height="${H}" fill="url(#lamp)"/>
-  <rect width="${W}" height="${H}" fill="url(#shade)"/>
-  <path d="M990 110V520" stroke="${WHITE}" stroke-opacity="0.16" stroke-width="1.5"/>
+  <rect width="${W}" height="${H}" fill="${WARM}"/>
+  <rect width="${W}" height="${H}" fill="url(#sun)"/>
+  <rect width="${W}" height="${H}" fill="url(#glow)"/>
+  <path d="M990 110V520" stroke="${BLACK}" stroke-opacity="0.14" stroke-width="1.5"/>
   ${rails}
-  <path d="M18 18H44M18 18V44M${W - 18} 18H${W - 44}M${W - 18} 18V44M18 ${H - 18}H44M18 ${H - 18}V${H - 44}M${W - 18} ${H - 18}H${W - 44}M${W - 18} ${H - 18}V${H - 44}" stroke="${WHITE}" stroke-opacity="0.3" stroke-width="1.5" fill="none"/>
-  <g transform="translate(${X - pad * lockScale} 64) scale(${lockScale.toFixed(4)})">${lockupBody(onDark)}</g>
-  ${text('Spend in the shade.', X, 300, 60, 600, -0.03, WHITE)}
-  ${text('Settle in the open.', X, 370, 60, 600, -0.03, GREY)}
-  ${text('Earn it back in zZEC.', X, 440, 60, 600, -0.03, ORANGE)}
-  ${text('Shielded market, merchant checkout and zZEC payouts on Robinhood Chain', X, 520, 22, 400, 0, GREY)}
+  <path d="M18 18H44M18 18V44M${W - 18} 18H${W - 44}M${W - 18} 18V44M18 ${H - 18}H44M18 ${H - 18}V${H - 44}M${W - 18} ${H - 18}H${W - 44}M${W - 18} ${H - 18}V${H - 44}" stroke="${BLACK}" stroke-opacity="0.3" stroke-width="1.5" fill="none"/>
+  <g transform="translate(${X - pad * lockScale} 64) scale(${lockScale.toFixed(4)})">${lockupBody(BLACK)}</g>
+  ${text('Spend in the shade.', X, 300, 60, 600, -0.03, BLACK)}
+  ${text('Settle in the open.', X, 370, 60, 600, -0.03, MUTE)}
+  <rect x="${X - 8}" y="${440 - 50}" width="${(earnW + 16).toFixed(1)}" height="64" fill="${YELLOW}"/>
+  ${text(earn, X, 440, 60, 600, -0.03, BLACK)}
+  ${text('Shielded market, merchant checkout and zZEC payouts on Robinhood Chain', X, 520, 22, 400, 0, MUTE)}
 </svg>`;
   writeFileSync(out('og-image.png'), png(og, W, true));
 }

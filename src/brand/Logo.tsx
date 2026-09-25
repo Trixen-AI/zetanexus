@@ -3,26 +3,25 @@ import { WORDMARK_CAP, WORDMARK_DESCENDER, WORDMARK_GLYPHS, WORDMARK_WIDTH } fro
 /**
  * The ZKRail lockup, inline.
  *
- * Mark: a "ZK" monogram laid as a rail junction on a square-cut tile. The Z and
- * the K's stem are the rail, in white; the K's arms are the fork where one payment
- * splits: mint for the shielded ZEC leg, orange for the leg that settles in public.
- * The tile is always dark, so the mark reads the same on any background.
+ * Mark: a rail leaving a tunnel. The black portal is the shade, where the ZEC
+ * payment travels shielded, with one yellow lamp showing something moves there;
+ * the track runs out into the yellow daylight of the tile, the leg that settles
+ * in the open. Zama yellow and black, fixed, so it reads on any background.
  * Geometry matches scripts/build-logo.mjs. Size is set in CSS (height).
  */
 
-const TILE = 'M8 0H40L48 8V40L40 48H8L0 40V8Z';
-const EDGE = 'M8.3 0.75H39.7L47.25 8.3V39.7L39.7 47.25H8.3L0.75 39.7V8.3Z';
+const TILE = 'M8 0H40A8 8 0 0 1 48 8V40A8 8 0 0 1 40 48H8A8 8 0 0 1 0 40V8A8 8 0 0 1 8 0Z';
+const PORTAL = 'M9 35V22A15 15 0 0 1 39 22V35Z';
 
 function MarkShapes() {
   return (
     <>
-      <path d={TILE} fill="var(--panel)" />
-      <path d={EDGE} fill="none" stroke="var(--graphite)" strokeWidth="1.5" />
-      <g fill="none" strokeWidth="4.4" strokeLinejoin="miter">
-        <path d="M27 25L40 14" stroke="var(--verdigris)" />
-        <path d="M30 22.46L40 34" stroke="var(--sodium)" />
-        <path d="M8 14H19L8 34H19" stroke="var(--bone)" strokeLinecap="square" />
-        <path d="M27 14V34" stroke="var(--bone)" strokeLinecap="square" />
+      <path d={TILE} fill="var(--sodium)" />
+      <path d={PORTAL} fill="var(--bone)" />
+      <circle cx="24" cy="24" r="3.2" fill="var(--sodium)" />
+      <g fill="none" stroke="var(--bone)">
+        <path d="M19.5 35L12 46.6M28.5 35L36 46.6" strokeWidth="3" />
+        <path d="M16 40H32M13 44.8H35" strokeWidth="2.4" />
       </g>
     </>
   );

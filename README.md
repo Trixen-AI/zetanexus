@@ -69,13 +69,14 @@ public RPC when the official one returns a malformed CORS header.
 
 ## Design direction
 
-The zats.market palette on a dark ground, with square-cut ticket panels and registration marks
+The zama.org palette: a white page with warm grey bands and tiles, black type, and black islands
+(the integration band, code blocks) set into it. Square-cut ticket panels and registration marks
 around the viewport.
 
-- **Black** `#0a0a0b` ground, **white** `#ffffff` type, **anthracite** `#232323` and **graphite** `#323232` panels and lines, **grey** `#999999` / `#6b6b6b` secondary text
-- **Mint** `#71cfa3` for everything shielded (the private leg)
-- **Orange** `#f98500` for everything settled in public, and for primary actions
-- **Sky** `#bcefff` for payouts and time (backing ratio, expiry)
+- **White** `#ffffff` ground, **warm grey** `#f2efec` tiles, **black** `#000000` type, greys `#e8e8e8` / `#d9d9d9` for lines
+- **Zama yellow** `#ffd209` for everything settled in public and for primary actions (type uses `#7d6000`)
+- **Near-black** `#2e2e2e` for everything shielded (the private leg, "in the shade")
+- **Zama orange** `#ffb243` for payouts and time (type uses `#9a5500`)
 - **Bricolage Grotesque** for display and UI, **Martian Mono** for labels, figures and code
 
 Frame devices, all in `src/styles/components.css`: `.frame` (viewport registration marks),
@@ -99,14 +100,14 @@ zZEC is issued by ZEAL, an independent project (github.com/zealtoken/zealtoken).
 
 ## The logo
 
-A "ZK" monogram laid as a rail junction on a square-cut tile (the same notch as the ticket
-panels). The Z and the K's stem are the rail, in white; the K's arms are the fork where one
-payment splits: mint for the shielded ZEC leg, orange for the leg that settles in public. The tile
-is always dark, so the mark reads the same on light and dark backgrounds.
+A rail leaving a tunnel, on a Zama-yellow tile. The black portal is the shade, where the ZEC
+payment travels shielded; one yellow lamp inside shows something is moving there without showing
+what. The track runs out of the portal into the daylight of the tile: the leg that settles in the
+open. The mark keeps its yellow and black on any background.
 
 `npm run logo` regenerates every output from one source (fonts in `scripts/fonts/`, OFL):
 
-- `public/brand/logo.svg` (on night) and `logo-light.svg`
+- `public/brand/logo.svg` (on white), `logo-light.svg` (transparent, black word) and `logo-dark.svg` (transparent, white word)
 - `public/brand/logo-500.png`, `logo-500-transparent.png` (500x500)
 - `public/brand/logo-mark.svg`, `logo-mark-500.png` (mark only, for the X avatar)
 - `public/brand/favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`

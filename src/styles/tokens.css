@@ -1,71 +1,77 @@
 /* ZKRail design tokens.
-   Palette taken from zats.market: near-black ground (#0a0a0b), white type,
-   anthracite and graphite panels, orange (#f98500) for everything that settles
-   in public and for the main calls to action, mint (#71cfa3) for everything that
-   stays shielded, sky (#bcefff) for zZEC payouts and time.
+   Palette taken from zama.org: white ground, warm grey (#f2efec) bands and tiles,
+   black type, Zama yellow (#ffd209) for everything that settles in public and for
+   the main calls to action, Zama orange (#ffb243) for zZEC payouts and time, and
+   near-black for everything that stays shielded ("spend in the shade").
 
-   Semantic names are kept from the first build so every component follows the
-   palette: `--ink` is the foreground (white), `--paper` the ground (black),
-   `--white` the raised panel. Geometry (spacing, type scale, breakpoints) is
-   unchanged. */
+   Yellow and orange are fills: as text on white they would not be readable, so
+   every accent has a `-deep` variant for type. Dark islands (the integration band
+   and code blocks) flip the tokens at the bottom of this file, the way Zama sets
+   black sections into a light page.
+
+   Semantic names are kept from the first build: `--ink` is the foreground,
+   `--paper` the ground, `--white` the raised panel. Geometry (spacing, type scale,
+   breakpoints) is unchanged. */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  /* --- raw palette (zats.market) -------------------------------------- */
-  --night: #0a0a0b;        /* black */
-  --night-deep: #050506;
-  --soot: #111112;
-  --panel: #171718;
-  --panel-2: #232323;      /* anthracite */
-  --graphite: #323232;
-  --bone: #ffffff;         /* white */
-  --mist: #f3f3f3;
-  --sodium: #f98500;       /* accent orange */
-  --verdigris: #71cfa3;    /* mint */
-  --brass: #bcefff;        /* sky */
+  /* --- raw palette (zama.org) ------------------------------------------ */
+  --night: #ffffff;          /* ground */
+  --night-deep: #f4f4f4;     /* soft grey: recessed fields and lists */
+  --soot: #f4f4f4;
+  --panel: #f2efec;          /* warm grey: raised tiles, active tabs */
+  --panel-2: #e8e8e8;        /* light grey */
+  --graphite: #d9d9d9;       /* medium grey: edges */
+  --shade: #b4b4b4;          /* dark grey */
+  --bone: #000000;           /* type */
+  --sodium: #ffd209;         /* Zama yellow */
+  --verdigris: #2e2e2e;      /* medium black: the shielded side */
+  --brass: #ffb243;          /* Zama orange */
+  --yellow-light: #fff2b5;
+  --yellow-soft: #fffbe6;
 
   /* rgb triplets, for translucent tints: rgb(var(--x-rgb) / 0.2) */
-  --ink-rgb: 255 255 255;
-  --paper-rgb: 10 10 11;
-  --shield-rgb: 113 207 163;
-  --settle-rgb: 249 133 0;
-  --signal-rgb: 188 239 255;
-  --alert-rgb: 255 90 79;
+  --ink-rgb: 0 0 0;
+  --paper-rgb: 255 255 255;
+  --shield-rgb: 46 46 46;
+  --settle-rgb: 255 210 9;
+  --signal-rgb: 255 178 67;
+  --alert-rgb: 217 58 43;
 
   /* --- semantic roles ------------------------------------------------- */
   --ink: var(--bone);
-  --ink-soft: #dcdcdc;
-  --ink-mute: #999999;     /* grey */
-  --ink-faint: #6b6b6b;    /* grey-deep */
+  --ink-soft: #2e2e2e;
+  --ink-mute: #676462;       /* Zama's black at 64% on white */
+  --ink-faint: #6b6865;      /* Zama light-text, darkened to stay readable on warm grey */
 
   --paper: var(--night);
-  --surface: #1b1b1c;
+  --surface: var(--panel);
   --surface-2: var(--soot);
-  --line: #262627;
+  --line: #e8e8e8;
   --line-strong: var(--graphite);
 
-  --white: var(--panel);
+  --white: #ffffff;
   --black: #000000;
-  --on-accent: #0a0a0b;
+  --on-accent: #000000;      /* black type on yellow, as on zama.org */
 
   /* shielded side (private) */
   --shield: var(--verdigris);
-  --shield-soft: #a8e3c8;
-  --shield-deep: #93dcba;
-  --shield-wash: rgb(var(--shield-rgb) / 0.1);
+  --shield-soft: #676462;
+  --shield-deep: #2e2e2e;
+  --shield-wash: rgb(var(--shield-rgb) / 0.06);
   /* settled side (public, on-chain) */
   --settle: var(--sodium);
-  --settle-soft: #ffb35c;
-  --settle-deep: #ffa133;
-  --settle-wash: rgb(var(--settle-rgb) / 0.1);
+  --settle-soft: #ffe052;
+  --settle-deep: #7d6000;    /* readable gold for type */
+  --settle-wash: rgb(var(--settle-rgb) / 0.18);
   /* payouts and time */
   --signal: var(--brass);
-  --signal-deep: #d9f6ff;
-  --signal-wash: rgb(var(--signal-rgb) / 0.12);
-  --alert: #ff5a4f;
-  --alert-deep: #ff8a82;
-  --alert-wash: rgb(var(--alert-rgb) / 0.12);
+  --signal-deep: #9a5500;    /* readable orange for type */
+  --signal-wash: rgb(var(--signal-rgb) / 0.18);
+  --alert: #d93a2b;
+  --alert-deep: #b42318;
+  --alert-wash: rgb(var(--alert-rgb) / 0.1);
 
   --ink-op-64: rgb(var(--ink-rgb) / 0.64);
   --ink-op-36: rgb(var(--ink-rgb) / 0.36);
@@ -149,4 +155,40 @@
     --section-default: 90px;
     --gap-xxxl: 90px;
   }
+}
+
+/* Dark islands: the integration band and code blocks, black like Zama's dark
+   sections. Derived tokens are restated because custom properties resolve where
+   they are declared. Syntax colours are the ones zama.org uses on black. */
+.integration,
+.split--ink,
+.panel--ink,
+.dash-code {
+  color-scheme: dark;
+  --ink: #ffffff;
+  --ink-rgb: 255 255 255;
+  --ink-soft: #f8f8f2;
+  --ink-mute: #b4b4b4;
+  --ink-faint: #7e7e7e;
+  --paper: #000000;
+  --paper-rgb: 0 0 0;
+  --night-deep: #000000;
+  --soot: #111111;
+  --panel: #1a1a1a;
+  --white: #141414;
+  --surface: #1a1a1a;
+  --surface-2: #111111;
+  --line: #2e2e2e;
+  --line-strong: #3d3d3d;
+  --shield-soft: #dcc6e0;
+  --settle-soft: #ffd209;
+  --settle-deep: #ffd209;
+  --signal-deep: #ffb243;
+  --alert-deep: #abe338;
+  --ink-op-64: rgb(255 255 255 / 0.64);
+  --ink-op-36: rgb(255 255 255 / 0.36);
+  --ink-op-12: rgb(255 255 255 / 0.12);
+  --white-op-64: rgb(255 255 255 / 0.64);
+  --white-op-36: rgb(255 255 255 / 0.58);
+  --white-op-12: rgb(255 255 255 / 0.1);
 }

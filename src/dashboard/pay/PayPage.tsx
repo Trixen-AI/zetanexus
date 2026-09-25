@@ -80,7 +80,7 @@ function PayBody({ p }: { p: NonNullable<ReturnType<typeof decodePay>> }) {
   useEffect(() => {
     if (!uri) return;
     let alive = true;
-    void QRCode.toDataURL(uri, { margin: 1, width: 360, color: { dark: '#0a0a0b', light: '#ffffff' } }).then((u) => alive && setQr(u));
+    void QRCode.toDataURL(uri, { margin: 1, width: 360, color: { dark: '#000000', light: '#ffffff' } }).then((u) => alive && setQr(u));
     return () => {
       alive = false;
     };

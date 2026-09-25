@@ -19,7 +19,7 @@ function useQr(value: string | null) {
       setSrc(null);
       return;
     }
-    QRCode.toDataURL(value, { margin: 1, width: 320, color: { dark: '#0a0a0b', light: '#ffffff' }, errorCorrectionLevel: 'M' })
+    QRCode.toDataURL(value, { margin: 1, width: 320, color: { dark: '#000000', light: '#ffffff' }, errorCorrectionLevel: 'M' })
       .then((url) => alive && setSrc(url))
       .catch(() => alive && setSrc(null));
     return () => {

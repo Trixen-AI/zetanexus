@@ -259,7 +259,7 @@
 .chip-change { font-size: 11px; }
 .chip-change.is-up { color: var(--settle-deep); }
 .chip-change.is-down { color: var(--alert); }
-.chip-live-dot { color: var(--settle); }
+.chip-live-dot { color: var(--settle-deep); }
 
 /* status dot */
 .dot {
@@ -411,7 +411,7 @@
 
 .section-index b {
   font-weight: 400;
-  color: var(--sodium);
+  color: var(--settle-deep);
 }
 
 .section-index::after {

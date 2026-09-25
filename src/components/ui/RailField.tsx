@@ -69,10 +69,10 @@ export function RailField({ className }: { className?: string }) {
 
       // field
       const field = ctx.createLinearGradient(0, 0, w, h * 0.7);
-      field.addColorStop(0, '#0d1210');
-      field.addColorStop(0.34, '#0c0d0d');
-      field.addColorStop(0.58, '#0e0e0e');
-      field.addColorStop(1, '#170f05');
+      field.addColorStop(0, '#fbf8f3');
+      field.addColorStop(0.34, '#f4f1ec');
+      field.addColorStop(0.58, '#f2efec');
+      field.addColorStop(1, '#fbf1d2');
       ctx.fillStyle = field;
       ctx.fillRect(0, 0, w, h);
 
@@ -80,7 +80,7 @@ export function RailField({ className }: { className?: string }) {
       const bloom = (cx: number, cy: number, r: number, color: string, alpha: number) => {
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
         g.addColorStop(0, color);
-        g.addColorStop(1, 'rgba(10, 10, 11, 0)');
+        g.addColorStop(1, 'rgba(255, 255, 255, 0)');
         ctx.globalAlpha = alpha;
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
@@ -90,25 +90,25 @@ export function RailField({ className }: { className?: string }) {
         w * (0.16 + Math.sin(t * 0.17) * 0.03),
         h * (0.34 + Math.cos(t * 0.13) * 0.05),
         Math.max(w, h) * 0.52,
-        'rgba(113, 207, 163, 0.17)',
+        'rgba(255, 210, 9, 0.42)',
         1,
       );
       bloom(
         w * (0.86 + Math.cos(t * 0.11) * 0.03),
         h * (0.68 + Math.sin(t * 0.15) * 0.05),
         Math.max(w, h) * 0.5,
-        'rgba(249, 133, 0, 0.21)',
+        'rgba(255, 178, 67, 0.34)',
         1,
       );
 
       // rails
       ctx.lineWidth = 1.6;
       for (let lane = 0; lane < LANES; lane += 1) {
-        // shielded half: dashed, violet, never resolving
+        // shielded half: dashed and dark, never resolving
         ctx.beginPath();
         ctx.setLineDash([11, 9]);
         ctx.lineDashOffset = -t * 14 + lane * 5;
-        ctx.strokeStyle = 'rgba(113, 207, 163, 0.55)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.3)';
         for (let x = 0; x <= w * CROSS; x += 8) {
           const y = laneY(lane, x);
           if (x === 0) ctx.moveTo(x, y);
@@ -116,10 +116,10 @@ export function RailField({ className }: { className?: string }) {
         }
         ctx.stroke();
 
-        // settled half: continuous, green
+        // settled half: continuous, in the open
         ctx.beginPath();
         ctx.setLineDash([]);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+        ctx.strokeStyle = 'rgba(0, 0, 0, 0.16)';
         for (let x = w * CROSS; x <= w; x += 8) {
           const y = laneY(lane, x);
           if (x === w * CROSS) ctx.moveTo(x, y);
@@ -131,7 +131,7 @@ export function RailField({ className }: { className?: string }) {
 
       // the crossing: a single vertical hairline, the moment privacy ends
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.strokeStyle = 'rgba(0, 0, 0, 0.12)';
       ctx.moveTo(w * CROSS, h * 0.12);
       ctx.lineTo(w * CROSS, h * 0.88);
       ctx.stroke();
@@ -145,10 +145,13 @@ export function RailField({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.arc(x, y, settled ? 3.2 : 2.4, 0, Math.PI * 2);
         if (settled) {
-          ctx.fillStyle = 'rgba(249, 133, 0, 0.95)';
+          ctx.fillStyle = '#ffd209';
           ctx.fill();
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
         } else {
-          ctx.strokeStyle = 'rgba(113, 207, 163, 0.75)';
+          ctx.strokeStyle = 'rgba(0, 0, 0, 0.55)';
           ctx.lineWidth = 1.4;
           ctx.stroke();
         }
