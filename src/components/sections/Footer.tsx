@@ -62,7 +62,7 @@ export function Footer() {
               <AssetChip symbol="ZEC" />
             </li>
             <li>
-              <AssetChip symbol="RHC" />
+              <AssetChip symbol="SOL" />
             </li>
             <li>
               <AssetChip symbol="USDC" />

@@ -2,11 +2,11 @@
 
 Spend ZEC in the shade. Settle it in the open.
 
-A shielded Zcash economy on Robinhood Chain, built as React + Vite + TypeScript:
+A shielded Zcash economy on Solana, built as React + Vite + TypeScript:
 
 - **The market**: eSIM data, AI credit, servers, VPN, proxies and domains, priced in dollars and paid in shielded ZEC.
 - **Holder payouts**: part of every $ZRAIL trading fee is converted to zZEC and pushed to qualifying holders.
-- **Merchant checkout**: accept shielded ZEC and settle each order as a public payout on Robinhood Chain.
+- **Merchant checkout**: accept shielded ZEC and settle each order as a public payout on Solana.
 
 ```bash
 npm install
@@ -130,6 +130,7 @@ They identify the assets a payment touches. The Zcash brandmark's viewBox is cro
 |---|---|
 | Zcash | `https://z.cash/press/` &rarr; `/wp-content/uploads/2023/11/Brandmark-Black.svg` |
 | USDC | `https://www.circle.com/brand` &rarr; `brandkit/logo-downloads/usdc.zip`, `Token Logo/USDC Token.svg` |
+| Solana | `https://solana.com/branding` &rarr; `/src/img/branding/solanaLogo.svg` (site chips) |
 | Robinhood Chain | `https://robinhood.com/us/en/chain/`, the inline `<svg aria-label="Robinhood Chain Logo">`. White is the only variant published there, so it always sits on a dark chip rather than being recoloured. |
 
 ## Links and domain

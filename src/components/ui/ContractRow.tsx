@@ -8,7 +8,7 @@ import { TOKEN } from '../../data/site';
  */
 export function ContractRow({ compact = false }: { compact?: boolean }) {
   const [copied, setCopied] = useState(false);
-  const ca = TOKEN.contract;
+  const ca = TOKEN.ca;
 
   // No contract yet: nothing to show. The row appears once CONTRACTS.token is set.
   if (!ca) return null;
@@ -33,7 +33,7 @@ export function ContractRow({ compact = false }: { compact?: boolean }) {
         <span className="hero-ca-short">{short}</span>
         {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
       </button>
-      <a className="hero-ca-link" href={`${TOKEN.explorerBase}${ca}`} target="_blank" rel="noopener noreferrer" aria-label={`View ${TOKEN.symbol} on Blockscout`}>
+      <a className="hero-ca-link" href={`${TOKEN.explorerBase}${ca}`} target="_blank" rel="noopener noreferrer" aria-label={`View ${TOKEN.symbol} on ${TOKEN.explorerName}`}>
         <IconArrowUpRight size={14} />
       </a>
       {copied ? (

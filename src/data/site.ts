@@ -4,7 +4,7 @@ export const BRAND = {
   name: 'ZRail',
   tagline: 'Spend in the shade. Settle in the open. Earn it back in zZEC.',
   description:
-    'ZRail is one shielded Zcash rail on Robinhood Chain: a private market, merchant checkout that settles in public, and zZEC payouts for $ZRAIL holders.',
+    'ZRail is one shielded Zcash rail on Solana: a private market, merchant checkout that settles in public, and zZEC payouts for $ZRAIL holders.',
 };
 
 /**
@@ -13,7 +13,7 @@ export const BRAND = {
  * switches on by itself. Empty strings keep those parts out of the page.
  */
 export const CONTRACTS = {
-  /** $ZRAIL token on Robinhood Chain. */
+  /** $ZRAIL token: a Solana mint address (or a 0x address). */
   token: '',
   /** zZEC distributor that pays holders. */
   distributor: '',
@@ -22,11 +22,18 @@ export const CONTRACTS = {
 };
 
 const isAddress = (a: string) => /^0x[0-9a-fA-F]{40}$/.test(a);
+const isSolanaAddress = (a: string) => /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(a);
+const tokenCa = CONTRACTS.token.trim();
+const solanaCa = isSolanaAddress(tokenCa);
 
 export const TOKEN = {
   symbol: 'ZRAIL',
-  contract: isAddress(CONTRACTS.token) ? CONTRACTS.token : '',
-  explorerBase: 'https://robinhoodchain.blockscout.com/token/',
+  /** 0x contract only: read by the dashboard and the bytecode checks. */
+  contract: isAddress(tokenCa) ? tokenCa : '',
+  /** The CA shown on the site, Solana or 0x. */
+  ca: solanaCa || isAddress(tokenCa) ? tokenCa : '',
+  explorerBase: solanaCa ? 'https://solscan.io/token/' : 'https://robinhoodchain.blockscout.com/token/',
+  explorerName: solanaCa ? 'Solscan' : 'Blockscout',
 };
 
 /** The demo merchant used in every checkout example on the page. */
@@ -78,7 +85,7 @@ export const NAV: NavGroup[] = [
 ];
 
 export const HERO = {
-  eyebrow: 'Shielded Zcash, on Robinhood Chain',
+  eyebrow: 'Shielded Zcash, on Solana',
   headingLines: ['Spend in the shade.', 'Settle in the open.', 'Earn it back in zZEC.'],
   lede:
     'ZRail is one shielded Zcash rail. Shoppers pay the market in private ZEC, merchants take ZEC and settle each order as a public receipt, and $ZRAIL holders receive part of the fees as zZEC.',
@@ -127,7 +134,7 @@ export const WHY = {
   items: [
     { title: 'No profile to lose', body: 'A recovery phrase kept in your browser is the whole account.' },
     { title: 'Shade by default', body: 'Purchases draw on a shielded ZEC balance, so nothing public links you to your basket.' },
-    { title: 'Bring any of three coins', body: 'ZEC directly, or ETH and zZEC on Robinhood Chain, converted on the way in.' },
+    { title: 'Bring any of three coins', body: 'ZEC directly, or SOL and zZEC on Solana, converted on the way in.' },
   ],
 };
 
@@ -173,7 +180,7 @@ export const LOOP = {
   heading: 'Every payment feeds the same loop.',
   steps: [
     { n: '01', tone: 'shield' as const, title: 'Pay in the shade', body: 'A shopper or a customer sends shielded ZEC. Sender, amount and memo stay encrypted on Zcash.' },
-    { n: '02', tone: 'settle' as const, title: 'Settle in the open', body: 'The payout lands on Robinhood Chain as an ordinary transaction anyone can look up.' },
+    { n: '02', tone: 'settle' as const, title: 'Settle in the open', body: 'The payout lands on Solana as an ordinary transaction anyone can look up.' },
     { n: '03', tone: 'signal' as const, title: 'Fees become zZEC', body: 'Trading fees on $ZRAIL are swapped into zZEC and handed to the distributor.' },
     { n: '04', tone: 'shield' as const, title: 'Back to holders', body: 'Holders receive zZEC, redeem it for ZEC or spend it at the market, and the loop starts again.' },
   ],
@@ -205,7 +212,7 @@ export const PRIVACY = {
     },
     {
       key: 'public',
-      title: 'Public on Robinhood Chain',
+      title: 'Public on Solana',
       tone: 'settle' as PrivacyTone,
       items: ['Settlement amount and asset', 'Destination address', 'Transaction hash and block', 'Liquidity provider address'],
     },
@@ -269,7 +276,7 @@ export function integrationTabs(zec: string | null) {
   "payout": {
     "amount": "${DEMO.payoutUsd.toFixed(2)}",
     "asset": "USDC",
-    "chain": "robinhood_chain"
+    "chain": "solana"
   }
 }`,
     },
