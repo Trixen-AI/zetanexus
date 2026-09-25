@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * The hero backdrop: ZetaNexus's own drawing, not a stock gradient.
+ * The hero backdrop: ZRail's own drawing, not a stock gradient.
  *
  * Reads left to right as the product does. The left third is the shielded side,
  * a violet field broken by dashed rails that never resolve into anything legible.
@@ -69,10 +69,10 @@ export function RailField({ className }: { className?: string }) {
 
       // field
       const field = ctx.createLinearGradient(0, 0, w, h * 0.7);
-      field.addColorStop(0, '#ece6ff');
-      field.addColorStop(0.34, '#f3f1fb');
-      field.addColorStop(0.58, '#f2f5f2');
-      field.addColorStop(1, '#e4f7ee');
+      field.addColorStop(0, '#10140f');
+      field.addColorStop(0.34, '#0e100c');
+      field.addColorStop(0.58, '#0f0f0c');
+      field.addColorStop(1, '#17100b');
       ctx.fillStyle = field;
       ctx.fillRect(0, 0, w, h);
 
@@ -80,7 +80,7 @@ export function RailField({ className }: { className?: string }) {
       const bloom = (cx: number, cy: number, r: number, color: string, alpha: number) => {
         const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
         g.addColorStop(0, color);
-        g.addColorStop(1, 'rgba(255,255,255,0)');
+        g.addColorStop(1, 'rgba(12, 13, 11, 0)');
         ctx.globalAlpha = alpha;
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, w, h);
@@ -90,14 +90,14 @@ export function RailField({ className }: { className?: string }) {
         w * (0.16 + Math.sin(t * 0.17) * 0.03),
         h * (0.34 + Math.cos(t * 0.13) * 0.05),
         Math.max(w, h) * 0.52,
-        'rgba(110, 86, 248, 0.34)',
+        'rgba(124, 196, 173, 0.17)',
         1,
       );
       bloom(
         w * (0.86 + Math.cos(t * 0.11) * 0.03),
         h * (0.68 + Math.sin(t * 0.15) * 0.05),
         Math.max(w, h) * 0.5,
-        'rgba(18, 201, 126, 0.3)',
+        'rgba(255, 106, 44, 0.21)',
         1,
       );
 
@@ -108,7 +108,7 @@ export function RailField({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.setLineDash([11, 9]);
         ctx.lineDashOffset = -t * 14 + lane * 5;
-        ctx.strokeStyle = 'rgba(110, 86, 248, 0.62)';
+        ctx.strokeStyle = 'rgba(124, 196, 173, 0.55)';
         for (let x = 0; x <= w * CROSS; x += 8) {
           const y = laneY(lane, x);
           if (x === 0) ctx.moveTo(x, y);
@@ -119,7 +119,7 @@ export function RailField({ className }: { className?: string }) {
         // settled half: continuous, green
         ctx.beginPath();
         ctx.setLineDash([]);
-        ctx.strokeStyle = 'rgba(18, 201, 126, 0.55)';
+        ctx.strokeStyle = 'rgba(235, 232, 216, 0.22)';
         for (let x = w * CROSS; x <= w; x += 8) {
           const y = laneY(lane, x);
           if (x === w * CROSS) ctx.moveTo(x, y);
@@ -131,7 +131,7 @@ export function RailField({ className }: { className?: string }) {
 
       // the crossing: a single vertical hairline, the moment privacy ends
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(13, 15, 18, 0.1)';
+      ctx.strokeStyle = 'rgba(235, 232, 216, 0.12)';
       ctx.moveTo(w * CROSS, h * 0.12);
       ctx.lineTo(w * CROSS, h * 0.88);
       ctx.stroke();
@@ -145,10 +145,10 @@ export function RailField({ className }: { className?: string }) {
         ctx.beginPath();
         ctx.arc(x, y, settled ? 3.2 : 2.4, 0, Math.PI * 2);
         if (settled) {
-          ctx.fillStyle = 'rgba(18, 201, 126, 0.95)';
+          ctx.fillStyle = 'rgba(255, 106, 44, 0.95)';
           ctx.fill();
         } else {
-          ctx.strokeStyle = 'rgba(110, 86, 248, 0.6)';
+          ctx.strokeStyle = 'rgba(124, 196, 173, 0.75)';
           ctx.lineWidth = 1.4;
           ctx.stroke();
         }

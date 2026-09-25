@@ -1,5 +1,5 @@
 /**
- * ZetaNexus's own icon set. Drawn on a 24 grid with a 1.6 stroke, square-ish joins
+ * ZRail's own icon set. Drawn on a 24 grid with a 1.6 stroke, square-ish joins
  * and no rounded flourishes, so they sit in the same shape language as the UI.
  */
 

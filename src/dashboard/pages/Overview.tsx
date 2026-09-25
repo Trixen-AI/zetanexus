@@ -3,12 +3,11 @@ import { erc20Abi } from 'viem';
 import { useBalance, useReadContract } from 'wagmi';
 import { CHAIN_ID } from '../config';
 import { useCheckoutViews, useMerchant } from '../merchant';
-import { apiConfigured } from '../lib/api';
 import { fmtDateTime, fmtEth, fmtRelative, fmtToken, shortAddr } from '../lib/format';
 import { checkoutForTransfer } from '../lib/reconcile';
 import { AddressLink, CopyButton, Empty, PageHead, PanelHead, StatusChip, TxLink } from '../ui';
 import { formatUsd, useZecPrice, zecFor, formatZec } from '../../lib/zecPrice';
-import { IconArrowRight, IconCheck } from '../../components/ui/Icons';
+import { IconArrowRight } from '../../components/ui/Icons';
 
 export function Overview() {
   const { ledger, settlementAddress, token, transfers } = useMerchant();
@@ -44,15 +43,6 @@ export function Overview() {
 
   const bySettlement = checkoutForTransfer(ledger.checkouts);
   const name = ledger.profile.merchantName;
-
-  const checklist = [
-    { done: !!name, label: 'Name your store', to: '/app/settings' },
-    { done: !!ledger.profile.webhookUrl, label: 'Add a webhook URL', to: '/app/settings' },
-    { done: views.length > 0, label: 'Create your first checkout', to: '/app/checkouts/new' },
-    { done: counts.settled > 0, label: 'Receive a settlement on Robinhood Chain', to: '/app/settlements' },
-    { done: apiConfigured(), label: 'Connect the ZetaNexus checkout API', to: '/app/developers' },
-  ];
-  const doneCount = checklist.filter((c) => c.done).length;
 
   return (
     <>
@@ -204,44 +194,21 @@ export function Overview() {
         </section>
       </div>
 
-      <div className="dash-grid-2">
-        <section className="dash-panel">
-          <PanelHead eyebrow="Setup" title={`${doneCount} of ${checklist.length} done`} />
-          <ol className="dash-checklist">
-            {checklist.map((item) => (
-              <li key={item.label} className={item.done ? 'is-done' : ''}>
-                <span className="dash-check" aria-hidden="true">
-                  {item.done ? <IconCheck size={12} /> : null}
-                </span>
-                {item.done ? (
-                  <span>{item.label}</span>
-                ) : (
-                  <Link to={item.to} className="dash-checklist-link">
-                    {item.label}
-                    <IconArrowRight size={12} />
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ol>
-        </section>
-
-        <section className="dash-panel">
-          <PanelHead eyebrow="Settled through ZetaNexus" title="Checkout volume" />
-          <p className="dash-big num">
-            {fmtToken(settledVolume, token.decimals)} <span className="dash-stat-unit">{token.symbol}</span>
-          </p>
-          <p className="dash-muted">
-            Sum of payouts matched to your checkouts. Transfers that arrived without a checkout are listed in Settlements and are
-            not counted here.
-          </p>
-          <div className="dash-inline">
-            <span className="mock-label">Settlement address</span>
-            <span className="num">{shortAddr(settlementAddress, 10, 8)}</span>
-            <CopyButton value={settlementAddress} compact />
-          </div>
-        </section>
-      </div>
+      <section className="dash-panel">
+        <PanelHead eyebrow="Settled through ZRail" title="Checkout volume" />
+        <p className="dash-big num">
+          {fmtToken(settledVolume, token.decimals)} <span className="dash-stat-unit">{token.symbol}</span>
+        </p>
+        <p className="dash-muted">
+          Sum of payouts matched to your checkouts. Transfers that arrived without a checkout are listed in Settlements and are not
+          counted here.
+        </p>
+        <div className="dash-inline">
+          <span className="mock-label">Settlement address</span>
+          <span className="num">{shortAddr(settlementAddress, 10, 8)}</span>
+          <CopyButton value={settlementAddress} compact />
+        </div>
+      </section>
     </>
   );
 }

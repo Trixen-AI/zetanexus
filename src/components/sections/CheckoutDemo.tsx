@@ -76,7 +76,8 @@ function AddressMatrix({ seed }: { seed: string }) {
   );
 }
 
-export function CheckoutDemo() {
+/** The interactive checkout panel, shown inside the Settle tab. */
+export function CheckoutPanel() {
   const [stage, setStage] = useState(0);
   const [seconds, setSeconds] = useState(QUOTE_SECONDS - 28);
   const [copied, setCopied] = useState(false);
@@ -129,14 +130,7 @@ export function CheckoutDemo() {
   };
 
   return (
-    <section className="section pt-lg pb-lg" id="checkout">
-      <div className="container">
-        <div className="head-center" data-reveal-group>
-          <h2 className="reveal">{CHECKOUT.heading}</h2>
-          <p className="lede reveal">{CHECKOUT.lede}</p>
-        </div>
-
-        <div className="checkout reveal" ref={wrapRef}>
+        <div className="checkout" ref={wrapRef}>
           <header className="checkout-head">
             <div className="checkout-merchant">
               <span className="checkout-merchant-name">{DEMO.merchant}</span>
@@ -245,7 +239,5 @@ export function CheckoutDemo() {
             <p className="checkout-note">Preview only. No real funds move in this demo.</p>
           </footer>
         </div>
-      </div>
-    </section>
   );
 }

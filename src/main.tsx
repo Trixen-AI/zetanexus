@@ -1,12 +1,14 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router';
-import '@fontsource-variable/space-grotesk';
-import '@fontsource-variable/jetbrains-mono';
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/martian-mono';
 import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/sections.css';
+import './styles/zrail.css';
+import './styles/zrail-layout.css';
 import App from './App';
 import { NotFound } from './NotFound';
 
@@ -38,6 +40,8 @@ const router = createBrowserRouter([
       { path: 'verify', lazy: page(() => import('./dashboard/pages/Verify'), 'Verify') },
       { path: 'developers', lazy: page(() => import('./dashboard/pages/Developers'), 'Developers') },
       { path: 'settings', lazy: page(() => import('./dashboard/pages/Settings'), 'Settings') },
+      { path: 'market', lazy: page(() => import('./dashboard/pages/Market'), 'Market') },
+      { path: 'earn', lazy: page(() => import('./dashboard/pages/Earn'), 'Earn') },
       { path: '*', Component: NotFound },
     ],
   },

@@ -37,7 +37,7 @@ export function Settlements() {
     );
     const csv = ['timestamp,block,tx_hash,from,amount,asset,order_ref', ...rows].join('\n');
     const url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-    Object.assign(document.createElement('a'), { href: url, download: `zetanexus-settlements-${Date.now()}.csv` }).click();
+    Object.assign(document.createElement('a'), { href: url, download: `zrail-settlements-${Date.now()}.csv` }).click();
     URL.revokeObjectURL(url);
   };
 

@@ -1,5 +1,5 @@
 {
-  "name": "zetanexus",
+  "name": "zrail",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,9 @@
     "logo": "node scripts/build-logo.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/martian-mono": "^5.3.0",
     "@fontsource-variable/space-grotesk": "^5.3.0",
     "@gsap/react": "^2.1.2",
     "@reown/appkit": "^1.8.24",
@@ -38,5 +40,8 @@
     "oxlint": "^1.81.0",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }

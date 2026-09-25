@@ -1,23 +1,38 @@
-/** All ZetaNexus copy and list data. One place, so wording is edited once. */
+/** All ZRail copy and list data. One place, so wording is edited once. */
 
 export const BRAND = {
-  name: 'ZetaNexus',
-  tagline: 'Private ZEC in. Onchain settlement out.',
+  name: 'ZRail',
+  tagline: 'Spend in the shade. Settle in the open. Earn it back in zZEC.',
   description:
-    'ZetaNexus takes shielded ZEC at checkout and settles the merchant payout on Robinhood Chain.',
+    'ZRail is one shielded Zcash rail on Robinhood Chain: a private market, merchant checkout that settles in public, and zZEC payouts for $ZRAIL holders.',
 };
 
-/** The ZNX token contract on Robinhood Chain (verified on-chain: ZetaNexus / ZNX, 18 decimals). */
+/**
+ * Contract addresses. Paste each one here when it is deployed; everything that
+ * depends on it (the CA row, the live contract checks, dashboard approvals)
+ * switches on by itself. Empty strings keep those parts out of the page.
+ */
+export const CONTRACTS = {
+  /** $ZRAIL token on Robinhood Chain. */
+  token: '',
+  /** zZEC distributor that pays holders. */
+  distributor: '',
+  /** Market payment contract that receives approved zZEC / USDG for orders. */
+  market: '',
+};
+
+const isAddress = (a: string) => /^0x[0-9a-fA-F]{40}$/.test(a);
+
 export const TOKEN = {
-  symbol: 'ZNX',
-  contract: '0xa76f958355d82f698e8535e1d8f51482204d2b67',
-  explorer: 'https://robinhoodchain.blockscout.com/token/0xa76f958355d82f698e8535e1d8f51482204d2b67',
+  symbol: 'ZRAIL',
+  contract: isAddress(CONTRACTS.token) ? CONTRACTS.token : '',
+  explorerBase: 'https://robinhoodchain.blockscout.com/token/',
 };
 
-/** The demo merchant used in every example on the page. */
+/** The demo merchant used in every checkout example on the page. */
 export const DEMO = {
-  merchant: 'ZetaNexus Demo Store',
-  order: 'ZN-ORD-0042',
+  merchant: 'ZRail Demo Store',
+  order: 'ZR-ORD-0042',
   /** Merchant payout per demo checkout, in USDC. The ZEC side is priced live. */
   payoutUsd: 250,
 };
@@ -32,154 +47,193 @@ export type NavGroup = {
 export const NAV: NavGroup[] = [
   {
     index: '01',
-    label: 'How it works',
-    href: '#how-it-works',
+    label: 'Spend',
+    href: '#spend',
     items: [
-      { label: 'Create quote', blurb: 'Lock a ZEC price for 15 minutes', href: '#how-it-works' },
-      { label: 'Receive ZEC', blurb: 'One shielded address per checkout', href: '#how-it-works' },
-      { label: 'Verify settlement', blurb: 'Payout hash on the block explorer', href: '#how-it-works' },
-      { label: 'Reconciliation', blurb: 'Late, partial and failed payments', href: '#features' },
+      { label: 'The market', blurb: 'eSIM, AI credit, servers and more', href: '#spend' },
+      { label: 'Open the market', blurb: 'Pay with shielded ZEC', href: '/app/market' },
+      { label: 'Privacy model', blurb: 'What stays private', href: '#trust' },
     ],
   },
   {
     index: '02',
-    label: 'Integration',
-    href: '#integration',
+    label: 'Settle',
+    href: '#settle',
     items: [
+      { label: 'Checkout demo', blurb: 'Shielded in, public receipt out', href: '#settle' },
       { label: 'Checkout API', blurb: 'One POST, one shielded address', href: '#integration' },
-      { label: 'Webhooks', blurb: 'Signed settlement events', href: '#features' },
-      { label: 'SDKs', blurb: 'Node, Python, Go', href: '#integration' },
-      { label: 'Sandbox', blurb: 'Preview mode, no real funds', href: '#checkout' },
+      { label: 'Merchant dashboard', blurb: 'Quotes, settlements, webhooks', href: '/app' },
     ],
   },
   {
     index: '03',
-    label: 'Security',
-    href: '#privacy',
+    label: 'Earn',
+    href: '#earn',
     items: [
-      { label: 'Privacy model', blurb: 'What is private, what is public', href: '#privacy' },
-      { label: 'Provider trust', blurb: 'What the liquidity provider sees', href: '#privacy' },
-      { label: 'Key handling', blurb: 'Viewing keys never leave the vault', href: '#privacy' },
-      { label: 'Status', blurb: 'Uptime and settlement latency', href: '#privacy' },
+      { label: 'Holder payouts', blurb: 'Fees returned as zZEC', href: '#earn' },
+      { label: 'zZEC backing', blurb: 'Read live from the reserve', href: '#trust' },
+      { label: 'Your wallet', blurb: 'Balance, payouts, redeem', href: '/app/earn' },
     ],
   },
 ];
 
 export const HERO = {
-  headingLines: ['Private ZEC in.', 'Onchain settlement out.'],
+  eyebrow: 'Shielded Zcash, on Robinhood Chain',
+  headingLines: ['Spend in the shade.', 'Settle in the open.', 'Earn it back in zZEC.'],
   lede:
-    'Accept shielded ZEC payments. Settle merchant orders on Robinhood Chain. Your customer keeps the privacy of the Zcash shielded pool, and you keep a settlement hash you can hand to an auditor.',
-  primary: { label: 'Open checkout', href: '/app/checkouts/new' },
-  secondary: { label: 'View integration', href: '#integration' },
-  stats: [
-    { label: 'Shielded volume routed', value: '$186.40', note: '' },
-    { label: 'Median settlement time', value: '94 seconds', note: 'Quote to payout' },
+    'ZRail is one shielded Zcash rail. Shoppers pay the market in private ZEC, merchants take ZEC and settle each order as a public receipt, and $ZRAIL holders receive part of the fees as zZEC.',
+  primary: { label: 'Open the app', href: '/app' },
+  secondary: { label: 'See how it connects', href: '#loop' },
+  pillars: [
+    { n: '01', key: 'spend', title: 'Spend', body: 'eSIM, AI credit, servers, VPN, proxies and domains, paid in shielded ZEC.' },
+    { n: '02', key: 'settle', title: 'Settle', body: 'Take ZEC from customers and settle every order as a public payout.' },
+    { n: '03', key: 'earn', title: 'Earn', body: 'Hold $ZRAIL and receive trading fees as zZEC, backed by real ZEC.' },
   ],
-  scrollHint: 'Scroll to explore',
+};
+
+/** Highlights from all three sides, on the drag rail under the hero. */
+export const RAIL = {
+  hint: 'Drag the rail',
+  items: [
+    { n: '01', tag: 'Spend', title: 'Travel data that lands before you do' },
+    { n: '02', tag: 'Spend', title: 'Model credit for every major provider' },
+    { n: '03', tag: 'Settle', title: 'A fresh shielded address for every order' },
+    { n: '04', tag: 'Settle', title: 'Quotes locked for fifteen minutes' },
+    { n: '05', tag: 'Settle', title: 'A payout hash on the block explorer' },
+    { n: '06', tag: 'Earn', title: 'Trading fees returned as zZEC' },
+    { n: '07', tag: 'Earn', title: 'zZEC redeemable for native ZEC' },
+    { n: '08', tag: 'Privacy', title: 'No profile, no email, no custody' },
+  ],
+};
+
+/* ==========================================================================
+   Three flows, one section: shoppers, merchants, holders.
+   ========================================================================== */
+
+export type MarketKind = 'esim' | 'ai' | 'server' | 'vpn' | 'proxy' | 'domain';
+
+export const MARKET = {
+  products: [
+    { kind: 'esim' as MarketKind, tag: 'Roam', name: 'eSIM', body: 'A data plan for wherever you land. Point your camera at the code and it sets itself up.' },
+    { kind: 'ai' as MarketKind, tag: 'Tokens', name: 'AI credit', body: 'Load credit once and spend it across the big model providers from a single key.' },
+    { kind: 'server' as MarketKind, tag: 'Root', name: 'Servers', body: 'Monthly Linux machines you reach over SSH. Pay for the month, walk away when it ends.' },
+    { kind: 'vpn' as MarketKind, tag: 'Route', name: 'VPN', body: 'Your traffic leaves through a tunnel with no customer record behind it.' },
+    { kind: 'proxy' as MarketKind, tag: 'Exit', name: 'Proxy', body: 'Exit addresses from homes or data centres, metered by the gigabyte you use.' },
+    { kind: 'domain' as MarketKind, tag: 'DNS', name: 'Domain', body: 'Register a name and point its records anywhere. The public record carries none of your details.' },
+  ],
+};
+
+export const WHY = {
+  items: [
+    { title: 'No profile to lose', body: 'A recovery phrase kept in your browser is the whole account.' },
+    { title: 'Shade by default', body: 'Purchases draw on a shielded ZEC balance, so nothing public links you to your basket.' },
+    { title: 'Bring any of three coins', body: 'ZEC directly, or ETH and zZEC on Robinhood Chain, converted on the way in.' },
+  ],
+};
+
+export const FLOWS = {
+  eyebrow: 'One rail, three ways in',
+  heading: 'Pick your side of the counter.',
+  lede: 'The same shielded ZEC moves through all three. Choose the one you came for.',
+  tabs: [
+    { key: 'spend', label: 'Spend', who: 'For shoppers' },
+    { key: 'settle', label: 'Settle', who: 'For merchants' },
+    { key: 'earn', label: 'Earn', who: 'For holders' },
+  ] as const,
+  earnSteps: [
+    { n: '01', title: 'Fee', tag: '', body: 'A cut of each $ZRAIL buy and sell is set aside.' },
+    { n: '02', title: 'Convert', tag: '', body: 'That cut is swapped into zZEC and parked in the distributor.' },
+    { n: '03', title: 'Share', tag: 'Automatic', body: 'Qualifying wallets get a slice sized to their holding.' },
+    { n: '04', title: 'Send', tag: 'One way', body: 'Slices go out once they outweigh the gas it costs to deliver them.' },
+  ],
+};
+
+export type FlowKey = (typeof FLOWS.tabs)[number]['key'];
+
+export const RULE = {
+  terms: [
+    { value: '$100', label: 'Holding needed', note: 'Kept for 15 minutes before the wallet qualifies' },
+    { value: '≤5%', label: 'Delivery cost cap', note: 'Of each payout, spent on gas' },
+  ],
 };
 
 export const CHECKOUT = {
-  heading: 'Try the checkout flow',
-  lede:
-    'See the full payment experience: shielded ZEC address, QR code, expiry countdown, settlement status, and Robinhood Chain receipt. No real funds required.',
   address: 'zs1q7c8f0m4v2w9k3n6h1r8t5y2u7i4o9p3a6s0d5f4x9',
   addressShort: 'zs1q7c8...f4x9',
   txHash: '0xf4e8...c91a',
   block: '18,442,907',
 };
 
-export const PROCESS = {
-  eyebrow: 'Process',
-  heading: 'Three moves, one receipt',
-  lede: 'A checkout starts as a quote, arrives as shielded ZEC, and ends as a public payout.',
+/* ==========================================================================
+   The loop: how the three sides feed each other.
+   ========================================================================== */
+
+export const LOOP = {
+  eyebrow: 'The loop',
+  heading: 'Every payment feeds the same loop.',
   steps: [
+    { n: '01', tone: 'shield' as const, title: 'Pay in the shade', body: 'A shopper or a customer sends shielded ZEC. Sender, amount and memo stay encrypted on Zcash.' },
+    { n: '02', tone: 'settle' as const, title: 'Settle in the open', body: 'The payout lands on Robinhood Chain as an ordinary transaction anyone can look up.' },
+    { n: '03', tone: 'signal' as const, title: 'Fees become zZEC', body: 'Trading fees on $ZRAIL are swapped into zZEC and handed to the distributor.' },
+    { n: '04', tone: 'shield' as const, title: 'Back to holders', body: 'Holders receive zZEC, redeem it for ZEC or spend it at the market, and the loop starts again.' },
+  ],
+};
+
+/* ==========================================================================
+   Trust: backing, privacy, and what the token can never do.
+   ========================================================================== */
+
+/** zZEC is issued by ZEAL, a separate project. Addresses from github.com/zealtoken/zealtoken, checked on-chain. */
+export const ZZEC = {
+  token: '0x0b151Ff7a7c5250130EC16C275790961d558E402',
+  decimals: 8,
+  /** ZEAL redemption desk: requestRedeem(amount, zcashAddress) after an approve. Minimum 0.001 zZEC. */
+  redemptionDesk: '0x9A1f622C2267fCdBD664D259A27b057B53E9cA1a',
+  reserveApi: 'https://zealtoken.com/api/reserve',
+  site: 'https://zealtoken.com',
+};
+
+export type PrivacyTone = 'shield' | 'settle' | 'signal';
+
+export const PRIVACY = {
+  columns: [
     {
-      n: '01',
-      title: 'Create quote',
-      body:
-        'The merchant asks for a payout amount and asset. ZetaNexus answers with the live ZEC price, a unique shielded payment address, and a 15 minute expiry window.',
-      tag: 'Shielded input',
+      key: 'shielded',
+      title: 'Shielded',
+      tone: 'shield' as PrivacyTone,
+      items: ['Sender wallet address', 'ZEC amount, on Zcash', 'Memo field', 'IP address, over Tor or a VPN'],
     },
     {
-      n: '02',
-      title: 'Receive ZEC',
-      body:
-        'The customer sends shielded ZEC to that address. Sender, amount, and memo stay encrypted on the Zcash blockchain, so the checkout leaks nothing about who paid.',
-      tag: 'Encrypted on-chain',
+      key: 'public',
+      title: 'Public on Robinhood Chain',
+      tone: 'settle' as PrivacyTone,
+      items: ['Settlement amount and asset', 'Destination address', 'Transaction hash and block', 'Liquidity provider address'],
     },
     {
-      n: '03',
-      title: 'Verify settlement',
-      body:
-        'Once the ZEC payment confirms, the liquidity provider executes the payout on Robinhood Chain. That settlement transaction is public and verifiable on the block explorer.',
-      tag: 'Public settlement',
+      key: 'provider',
+      title: 'Provider observes',
+      tone: 'signal' as PrivacyTone,
+      items: ['Which ZEC payment funded which payout', 'Exchange rate applied', 'Timing and confirmations', 'Merchant identity'],
     },
   ],
 };
 
-export type FeatureKind = 'address' | 'quote' | 'webhook' | 'states';
-
-export const FEATURES = {
-  eyebrow: 'Features',
-  heading: 'Everything a payment needs after the price is agreed',
-  lede:
-    'Quotes expire, customers underpay, webhooks get retried. ZetaNexus treats all of that as part of the product rather than an edge case.',
-  items: [
-    {
-      title: 'A shielded address for every checkout',
-      body: 'Addresses are single use, so two orders can never be confused for one another.',
-      kind: 'address' as FeatureKind,
-    },
-    {
-      title: 'A fixed quote with an explicit expiry',
-      body:
-        'The ZEC amount and the rate are locked when the quote is issued, then counted down in the open.',
-      kind: 'quote' as FeatureKind,
-    },
-    {
-      title: 'A signed webhook and a settlement receipt',
-      body: 'Every state change arrives signed, with the settlement hash attached once the payout lands.',
-      kind: 'webhook' as FeatureKind,
-    },
-    {
-      title: 'Reconciliation for late, partial and failed payments',
-      body: 'Each checkout carries one status. Nothing is left in a state your ledger cannot name.',
-      kind: 'states' as FeatureKind,
-    },
-  ],
+export const TRUST = {
+  eyebrow: 'Check it yourself',
+  heading: 'Nothing here needs taking on faith.',
+  lede: 'The reserve behind zZEC, what each party can see, and what the $ZRAIL contract is built unable to do.',
+  never: ['Mint', 'Blacklist', 'Pause', 'Upgrade', 'Raise the fee', 'Hold team tokens'],
 };
 
-export const RECONCILE = {
-  eyebrow: 'Reconciliation',
-  heading: 'One status, whatever the customer does',
-  body:
-    'A quote can expire before the ZEC lands. A customer can send half. A payout can fail and need a retry. ZetaNexus writes one status per checkout and keeps the history, so your books match the chain without anyone reading a mempool.',
-  flow: [
-    { state: 'awaiting_payment', note: 'Quote issued, address live', active: false },
-    { state: 'confirming', note: 'ZEC seen, waiting on depth', active: false },
-    { state: 'funded', note: 'Shielded leg complete', active: false },
-    { state: 'settled', note: 'Payout hash on Robinhood Chain', active: true },
-  ],
-  terminal: [
-    { state: 'expired', note: '15 minutes elapsed, no funds' },
-    { state: 'partial', note: 'Underpaid, refund address required' },
-    { state: 'failed', note: 'Payout reverted, retry queued' },
-  ],
-};
-
-export const SETTLEMENT = {
-  eyebrow: 'Settlement',
-  heading: 'The public leg is the part you can prove',
-  body:
-    'ZetaNexus does not ask you to trust a screenshot. Every payout is an ordinary Robinhood Chain transaction with an amount, a destination, and a block. Paste the hash into an explorer and the merchant side of the payment is fully accounted for.',
-};
+/* ==========================================================================
+   Merchant API.
+   ========================================================================== */
 
 export const INTEGRATION = {
-  eyebrow: 'Integration',
+  eyebrow: 'For merchants',
   heading: 'API-first checkout',
-  lede:
-    'One POST creates the quote and returns the shielded address. There is no widget to embed and no wallet to connect.',
-  docs: { label: 'View docs', href: '#integration' },
+  lede: 'One POST creates the quote and returns the shielded address. There is no widget to embed and no wallet to connect.',
+  docs: { label: 'Open the dashboard', href: '/app/developers' },
 };
 
 /** The three payloads shown in the code panel. `zec` is the live-priced amount
@@ -198,7 +252,7 @@ export function integrationTabs(zec: string | null) {
   "payout_amount": "${DEMO.payoutUsd.toFixed(2)}",
   "payout_asset": "USDC",
   "settlement_address": "0x742d...4e29",
-  "webhook_url": "https://z2r-nexus.com/hooks/z2r"
+  "webhook_url": "https://your-store.com/hooks/zrail"
 }`,
     },
     {
@@ -211,7 +265,7 @@ export function integrationTabs(zec: string | null) {
   "status": "awaiting_payment",
   "zec_amount": "${amount}",
   "shielded_address": "zs1q7c8...f4x9",
-  "expires_at": "2026-09-18T14:47:00Z",
+  "expires_at": "2026-09-25T14:47:00Z",
   "payout": {
     "amount": "${DEMO.payoutUsd.toFixed(2)}",
     "asset": "USDC",
@@ -237,71 +291,23 @@ export const WEBHOOK_SAMPLE = `{
   "signature": "sha256=9d1f..."
 }`;
 
-export type PrivacyTone = 'shield' | 'settle' | 'signal';
+/* ==========================================================================
+   Final call to action + merchant access form.
+   ========================================================================== */
 
-export const PRIVACY = {
-  eyebrow: 'Privacy model',
-  heading: 'What stays private. What becomes public.',
-  lede:
-    'ZetaNexus is not a trustless bridge and it is not a private Robinhood transaction. The ZEC payment can be shielded, but the settlement is public. Here is exactly what each party can observe.',
-  columns: [
-    {
-      key: 'shielded',
-      title: 'Shielded',
-      subtitle: 'Private',
-      tone: 'shield' as PrivacyTone,
-      items: [
-        'Sender wallet address',
-        'ZEC payment amount, on Zcash',
-        'Transaction memo field',
-        'Sender IP address, over Tor or a VPN',
-      ],
-    },
-    {
-      key: 'public',
-      title: 'Public',
-      subtitle: 'On Robinhood Chain',
-      tone: 'settle' as PrivacyTone,
-      items: [
-        'Settlement amount and asset',
-        'Merchant destination address',
-        'Transaction hash and block',
-        'Liquidity provider address',
-      ],
-    },
-    {
-      key: 'provider',
-      title: 'Provider observes',
-      subtitle: 'Trusted intermediary',
-      tone: 'signal' as PrivacyTone,
-      items: [
-        'Correlation between ZEC payment and settlement',
-        'Exchange rate applied',
-        'Payment timing and confirmation speed',
-        'Merchant identity, from the checkout request',
-      ],
-    },
-  ],
+export const CLOSING = {
+  line: 'Earn it. Spend it. Keep it quiet.',
+  lede: 'Hold $ZRAIL for zZEC, spend shielded ZEC at the market, and let your own customers pay you in ZEC that settles in public.',
 };
 
-/** Recent demo receipts. Payouts are computed from the live ZEC price. */
-export const TICKER = [
-  { id: 'chk_a1b2c3d4', zec: 0.17189, tx: '0xf4e8...c91a' },
-  { id: 'chk_9f3e71a0', zec: 0.05614, tx: '0x71bd...4402' },
-  { id: 'chk_2c8d05be', zec: 0.43667, tx: '0x0ae3...9d17' },
-  { id: 'chk_6b10f24c', zec: 0.01293, tx: '0xcc52...1f8b' },
-  { id: 'chk_d4470e19', zec: 0.26402, tx: '0x3f96...b7e5' },
-  { id: 'chk_51ea9c72', zec: 0.10534, tx: '0x8d21...f07a' },
-];
-
 export const ACCESS = {
-  eyebrow: 'Get started',
+  eyebrow: 'For merchants',
   heading: 'Request integration access',
-  lede: 'Tell us what you are settling and we will open a sandbox key.',
+  lede: 'Tell us what you settle and we will open a sandbox key.',
   fields: [
-    { name: 'project', label: 'Project name', placeholder: 'ZetaNexus Demo Store', type: 'text' },
-    { name: 'email', label: 'Email', placeholder: 'dev@z2r-nexus.com', type: 'email' },
-    { name: 'website', label: 'Website', placeholder: 'https://z2r-nexus.com', type: 'url' },
+    { name: 'project', label: 'Project name', placeholder: 'Your store', type: 'text' },
+    { name: 'email', label: 'Email', placeholder: 'dev@your-store.com', type: 'email' },
+    { name: 'website', label: 'Website', placeholder: 'https://your-store.com', type: 'url' },
     { name: 'volume', label: 'Expected monthly volume', placeholder: 'e.g. 500 checkouts', type: 'text' },
   ],
   submit: 'Submit request',
@@ -311,45 +317,41 @@ export const ACCESS = {
 export const FOOTER = {
   columns: [
     {
-      title: 'Product',
+      title: 'Spend',
       links: [
-        { label: 'Dashboard', href: '/app' },
-        { label: 'How it works', href: '#how-it-works' },
-        { label: 'Integration', href: '#integration' },
-        { label: 'Security', href: '#privacy' },
-        { label: 'Checkout demo', href: '#checkout' },
+        { label: 'The market', href: '#spend' },
+        { label: 'Open the market', href: '/app/market' },
+        { label: 'Privacy model', href: '#trust' },
       ],
     },
     {
-      title: 'Developers',
+      title: 'Settle',
       links: [
-        { label: 'API reference', href: '#integration' },
-        { label: 'Webhooks', href: '#features' },
-        { label: 'SDKs', href: '#integration' },
-        { label: 'Sandbox keys', href: '#access' },
+        { label: 'Checkout demo', href: '#settle' },
+        { label: 'Checkout API', href: '#integration' },
+        { label: 'Merchant dashboard', href: '/app' },
+        { label: 'Request access', href: '#access' },
       ],
     },
     {
-      title: 'Resources',
+      title: 'Earn',
       links: [
-        { label: 'Status', href: '#privacy' },
-        { label: 'Changelog', href: '#integration' },
-        { label: 'Privacy model', href: '#privacy' },
-        { label: 'Support', href: '#access' },
+        { label: 'Holder payouts', href: '#earn' },
+        { label: 'zZEC backing', href: '#trust' },
+        { label: 'Your wallet', href: '/app/earn' },
       ],
     },
   ],
   community: {
     title: 'Community',
-    links: [{ label: 'X', href: 'https://x.com/ZetaNexus_' }],
+        links: [{ label: 'X', href: 'https://x.com/ZRail_' }],
   },
   company: {
     title: 'Company',
     links: [
-      { label: 'About', href: '#how-it-works' },
+      { label: 'How it connects', href: '#loop' },
       { label: 'Contact', href: '#access' },
       { label: 'Brand kit', href: '/brand/logo.svg' },
-      { label: 'Legal', href: '#privacy' },
     ],
   },
 };

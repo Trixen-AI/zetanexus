@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import { Link } from 'react-router';
 import { RailField } from '../ui/RailField';
 import { AssetChip, ZcashMark } from '../ui/AssetMarks';
-import { IconArrowRight, IconArrowUpRight, IconCheck, IconChevronDown, IconCopy } from '../ui/Icons';
-import { HERO, TOKEN } from '../../data/site';
+import { ContractRow } from '../ui/ContractRow';
+import { IconArrowRight } from '../ui/Icons';
+import { HERO } from '../../data/site';
 import { formatUsd, useZecPrice } from '../../lib/zecPrice';
 
 function LiveZecChip() {
@@ -25,40 +25,6 @@ function LiveZecChip() {
   );
 }
 
-function ContractRow() {
-  const [copied, setCopied] = useState(false);
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(TOKEN.contract);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
-    } catch {
-      /* clipboard blocked; the address is on screen */
-    }
-  };
-  const short = `${TOKEN.contract.slice(0, 8)}...${TOKEN.contract.slice(-6)}`;
-  return (
-    <div className="hero-ca">
-      <span className="hero-ca-key">
-        CA <span className="hero-ca-symbol">${TOKEN.symbol}</span>
-      </span>
-      <button type="button" className="hero-ca-value num" onClick={copy} title="Copy contract address" aria-label={`Copy contract address ${TOKEN.contract}`}>
-        <span className="hero-ca-full">{TOKEN.contract}</span>
-        <span className="hero-ca-short">{short}</span>
-        {copied ? <IconCheck size={14} /> : <IconCopy size={14} />}
-      </button>
-      <a className="hero-ca-link" href={TOKEN.explorer} target="_blank" rel="noopener noreferrer" aria-label="View ZNX on Blockscout">
-        <IconArrowUpRight size={14} />
-      </a>
-      {copied ? (
-        <span className="hero-ca-toast" role="status">
-          Copied
-        </span>
-      ) : null}
-    </div>
-  );
-}
-
 export function Hero() {
   return (
     <section className="section hero" id="top">
@@ -67,6 +33,11 @@ export function Hero() {
           <RailField className="hero-field" />
 
           <div className="hero-content">
+            <p className="hero-kicker reveal">
+              <span className="hero-kicker-lamp" aria-hidden="true" />
+              {HERO.eyebrow}
+            </p>
+
             <h1 className="hero-title reveal">
               {HERO.headingLines.map((line) => (
                 <span key={line}>{line}</span>
@@ -76,7 +47,7 @@ export function Hero() {
             <p className="lede hero-lede reveal">{HERO.lede}</p>
 
             <div className="hero-actions reveal">
-              <Link className="btn btn--ink" to={HERO.primary.href}>
+              <Link className="btn btn--brand" to={HERO.primary.href}>
                 {HERO.primary.label}
                 <IconArrowRight size={15} />
               </Link>
@@ -97,27 +68,24 @@ export function Hero() {
               </li>
             </ul>
 
-            <div className="reveal">
-              <ContractRow />
-            </div>
+            <ContractRow />
           </div>
 
-          <div className="hero-foot">
-            <div className="hero-stats" data-reveal-group>
-              {HERO.stats.map((stat) => (
-                <div className="hero-stat reveal" key={stat.label}>
-                  <p className="hero-stat-label">{stat.label}</p>
-                  <p className="hero-stat-value num">{stat.value}</p>
-                  {stat.note && <p className="hero-stat-note">{stat.note}</p>}
-                </div>
-              ))}
-            </div>
-
-            <a className="hero-scroll" href="#checkout">
-              {HERO.scrollHint}
-              <IconChevronDown size={13} />
-            </a>
-          </div>
+          {/* the three sides of the rail, each opens its tab below */}
+          <ol className="hero-pillars" data-reveal-group>
+            {HERO.pillars.map((p) => (
+              <li className="reveal" key={p.key}>
+                <a href={`#${p.key}`} className={`hero-pillar hero-pillar--${p.key}`}>
+                  <span className="hero-pillar-n num">{p.n}</span>
+                  <span className="hero-pillar-title">
+                    {p.title}
+                    <IconArrowRight size={14} />
+                  </span>
+                  <span className="hero-pillar-body">{p.body}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>

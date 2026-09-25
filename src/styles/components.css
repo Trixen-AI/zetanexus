@@ -123,21 +123,21 @@
   border-color: var(--shield);
   color: var(--white);
 }
-.btn--brand:hover { background: #5b43e6; border-color: #5b43e6; }
+.btn--brand:hover { background: var(--settle-soft); border-color: var(--settle-soft); }
 
 .btn--ghost {
   background: transparent;
   border-color: var(--line-strong);
   color: var(--ink);
 }
-.btn--ghost:hover { border-color: var(--ink); background: rgba(13, 15, 18, 0.04); }
+.btn--ghost:hover { border-color: var(--ink); background: rgb(var(--ink-rgb) / 0.04); }
 
 .btn--onDark {
   background: var(--white);
   border-color: var(--white);
   color: var(--ink);
 }
-.btn--onDark:hover { background: #e9e9e4; border-color: #e9e9e4; }
+.btn--onDark:hover { background: var(--ink-soft); border-color: var(--ink-soft); }
 
 .btn--ghostDark {
   background: transparent;
@@ -228,9 +228,9 @@
   white-space: nowrap;
 }
 
-.chip--shield { border-color: rgba(110, 86, 248, 0.32); background: var(--shield-wash); color: #4b34d6; }
-.chip--settle { border-color: rgba(18, 201, 126, 0.32); background: var(--settle-wash); color: #0b8c57; }
-.chip--signal { border-color: rgba(255, 176, 32, 0.4); background: var(--signal-wash); color: #96620a; }
+.chip--shield { border-color: rgb(var(--shield-rgb) / 0.32); background: var(--shield-wash); color: var(--shield-deep); }
+.chip--settle { border-color: rgb(var(--settle-rgb) / 0.32); background: var(--settle-wash); color: var(--settle-deep); }
+.chip--signal { border-color: rgb(var(--signal-rgb) / 0.4); background: var(--signal-wash); color: var(--signal-deep); }
 .chip--dark { background: var(--white-op-12); border-color: var(--white-op-36); color: var(--white); }
 
 /* Asset chips carry official marks. They are sized so a mark reads at a glance:
@@ -257,7 +257,7 @@
 
 .chip-price { font-size: var(--fs-p-small); color: var(--ink); }
 .chip-change { font-size: 11px; }
-.chip-change.is-up { color: #0b8c57; }
+.chip-change.is-up { color: var(--settle-deep); }
 .chip-change.is-down { color: var(--alert); }
 .chip-live-dot { color: var(--settle); }
 
@@ -301,4 +301,122 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   ZRail: dark-ground fixes and the new frame devices.
+   ========================================================================== */
+
+/* primary action: sodium lamp, dark type */
+.btn--brand {
+  background: var(--sodium);
+  border-color: var(--sodium);
+  color: var(--on-accent);
+}
+.btn--brand:hover { background: var(--settle-soft); border-color: var(--settle-soft); }
+
+/* "ink" bands used to be dark on a light page; on a night page they sink deeper */
+.panel--ink { background: var(--night-deep); color: var(--ink); }
+
+/* Robinhood Chain publishes a white logo only: it always sits on true black */
+.chip--rhc { background: #000000; border-color: var(--line-strong); }
+
+/* --- page frame: registration marks around the viewport ------------------ */
+.frame {
+  position: fixed;
+  inset: var(--frame-inset);
+  z-index: 70;
+  pointer-events: none;
+}
+
+.frame i {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--line-strong);
+  border-style: solid;
+  border-width: 0;
+}
+
+.frame i:nth-child(1) { top: 0; left: 0; border-top-width: 1px; border-left-width: 1px; }
+.frame i:nth-child(2) { top: 0; right: 0; border-top-width: 1px; border-right-width: 1px; }
+.frame i:nth-child(3) { bottom: 0; left: 0; border-bottom-width: 1px; border-left-width: 1px; }
+.frame i:nth-child(4) { bottom: 0; right: 0; border-bottom-width: 1px; border-right-width: 1px; }
+
+.frame-label {
+  position: absolute;
+  top: -6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  background: var(--paper);
+  padding: 0 6px;
+}
+
+.frame-label--left { left: 24px; }
+.frame-label--right { right: 24px; }
+
+@media screen and (max-width: 767px) {
+  .frame-label { display: none; }
+}
+
+/* --- ticket panel: square-cut corners + a perforated tear line ------------ */
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  clip-path: polygon(
+    var(--notch) 0, calc(100% - var(--notch)) 0, 100% var(--notch),
+    100% calc(100% - var(--notch)), calc(100% - var(--notch)) 100%,
+    var(--notch) 100%, 0 calc(100% - var(--notch)), 0 var(--notch)
+  );
+}
+
+.ticket-tear {
+  position: relative;
+  height: 0;
+  border-top: 1px dashed var(--line-strong);
+  margin-inline: calc(var(--pad-medium) * -1);
+}
+
+.ticket-tear::before,
+.ticket-tear::after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper);
+}
+
+.ticket-tear::before { left: -7px; }
+.ticket-tear::after { right: -7px; }
+
+/* section index: "02 / MARKET" set in the gutter above a heading */
+.section-index {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-xsmall);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.section-index b {
+  font-weight: 400;
+  color: var(--sodium);
+}
+
+.section-index::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
 }

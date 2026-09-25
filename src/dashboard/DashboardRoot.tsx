@@ -45,7 +45,7 @@ function GateFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="dash-gate">
       <header className="dash-gate-bar container">
-        <Link to="/" className="nav-logo" aria-label="ZetaNexus website">
+        <Link to="/" className="nav-logo" aria-label="ZRail website">
           <Logo />
         </Link>
         <Link to="/" className="btn btn--ghost btn--sm">
@@ -69,7 +69,7 @@ function ConnectScreen() {
       <p className="eyebrow">Merchant dashboard</p>
       <h1 className="dash-gate-title">Connect the wallet that receives your payouts.</h1>
       <p className="lede">
-        ZetaNexus pays merchants on {CHAIN_NAME}. Connect the address your settlements land on to create checkouts, watch
+        ZRail pays merchants on {CHAIN_NAME}. Connect the address your settlements land on to create checkouts, watch
         payouts arrive and reconcile orders against the chain.
       </p>
       <div className="hero-actions">
@@ -122,6 +122,8 @@ const NAV = [
   { to: '/app/settlements', label: 'Settlements', end: false },
   { to: '/app/verify', label: 'Verify transaction', end: false },
   { to: '/app/developers', label: 'Developers', end: false },
+  { to: '/app/market', label: 'Market', end: false },
+  { to: '/app/earn', label: 'Earn', end: false },
   { to: '/app/settings', label: 'Settings', end: false },
 ];
 
@@ -139,7 +141,7 @@ function Shell() {
     <div className="dash">
       <aside className={`dash-side${menu ? ' is-open' : ''}`}>
         <div className="dash-side-top">
-          <Link to="/app" className="nav-logo" aria-label="ZetaNexus dashboard home">
+          <Link to="/app" className="nav-logo" aria-label="ZRail dashboard home">
             <Logo />
           </Link>
         </div>
@@ -181,7 +183,7 @@ function TopBar({ menu, onMenu }: { menu: boolean; onMenu: () => void }) {
       <button type="button" className="dash-burger" onClick={onMenu} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu}>
         {menu ? <IconClose /> : <IconMenu />}
       </button>
-      <Link to="/app" className="nav-logo dash-top-logo" aria-label="ZetaNexus dashboard home">
+      <Link to="/app" className="nav-logo dash-top-logo" aria-label="ZRail dashboard home">
         <Logo />
       </Link>
       <div className="dash-top-right">

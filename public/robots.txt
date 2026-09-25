@@ -1,8 +1,8 @@
-# ZetaNexus - https://z2r-nexus.com
+# ZRail - https://zrail.app
 User-agent: *
 Allow: /
 # Merchant dashboard and customer payment links are private surfaces.
 Disallow: /app
 Disallow: /pay/
 
-Sitemap: https://z2r-nexus.com/sitemap.xml
+Sitemap: https://zrail.app/sitemap.xml

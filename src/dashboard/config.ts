@@ -9,7 +9,7 @@ import type { Address } from 'viem';
 
 export const ENV = {
   reownProjectId: (import.meta.env.VITE_REOWN_PROJECT_ID as string | undefined)?.trim() ?? '',
-  apiUrl: ((import.meta.env.VITE_ZETANEXUS_API_URL as string | undefined)?.trim() ?? '').replace(/\/+$/, ''),
+  apiUrl: ((import.meta.env.VITE_ZRAIL_API_URL as string | undefined)?.trim() ?? '').replace(/\/+$/, ''),
   rpcUrl:
     (import.meta.env.VITE_RHC_RPC_URL as string | undefined)?.trim() || 'https://rpc.mainnet.chain.robinhood.com',
 };

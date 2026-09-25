@@ -36,7 +36,7 @@ function PayFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="dash-gate">
       <header className="dash-gate-bar container">
-        <Link to="/" className="nav-logo" aria-label="ZetaNexus">
+        <Link to="/" className="nav-logo" aria-label="ZRail">
           <Logo />
         </Link>
         <span className="chip chip--shield">

@@ -1,5 +1,5 @@
 /**
- * Marks for the assets and networks a ZetaNexus payment actually touches.
+ * Marks for the assets and networks a ZRail payment actually touches.
  *
  * Every mark here is the brand's own official SVG, inlined unmodified and only
  * resized. They identify the assets involved in a payment; they are not a claim
@@ -19,7 +19,9 @@
  *                    shown on a dark chip rather than recoloured.
  */
 
-export function ZcashMark({ size = 18, color = '#0d0f12' }: { size?: number; color?: string }) {
+// Default is the official white brandmark (z.cash/press, Brandmark-White.svg, fill #fff):
+// the site is dark, so the black variant would disappear.
+export function ZcashMark({ size = 18, color = '#ffffff' }: { size?: number; color?: string }) {
   return (
     <svg width={size} height={size} viewBox="270 270 540 540" aria-hidden="true" focusable="false">
       <path

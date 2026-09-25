@@ -1,7 +1,7 @@
 /* ==========================================================================
    Section styles. Vertical rhythm, container widths, type scale and the grid
    breakpoints (992 / 768 / 480) follow the layout system this site was rebuilt
-   against; every colour, word and drawing is ZetaNexus's own.
+   against; every colour, word and drawing is ZRail's own.
    ========================================================================== */
 
 /* --- navigation ----------------------------------------------------------- */
@@ -63,7 +63,7 @@
 
 .nav-trigger:hover {
   color: var(--ink);
-  background: rgba(13, 15, 18, 0.04);
+  background: rgb(var(--ink-rgb) / 0.04);
 }
 
 .nav-index {
@@ -98,7 +98,7 @@
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 18px 40px -22px rgba(13, 15, 18, 0.34);
+  box-shadow: 0 18px 40px -22px rgb(0 0 0 / 0.75);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-6px);
@@ -191,7 +191,7 @@
   content: "";
   position: absolute;
   inset: -40px -120px -32px -64px;
-  background: radial-gradient(70% 62% at 32% 48%, rgba(250, 250, 249, 0.92) 0%, rgba(250, 250, 249, 0.6) 52%, rgba(250, 250, 249, 0) 100%);
+  background: radial-gradient(70% 62% at 32% 48%, rgb(var(--paper-rgb) / 0.92) 0%, rgb(var(--paper-rgb) / 0.6) 52%, rgb(var(--paper-rgb) / 0) 100%);
   z-index: -1;
   pointer-events: none;
 }
@@ -243,7 +243,7 @@
   max-width: 100%;
   border: 1px solid var(--line-strong);
   border-radius: var(--radius-tiny);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgb(23 26 20 / 0.92);
   backdrop-filter: blur(8px);
   overflow: hidden;
 }
@@ -277,7 +277,7 @@
   transition: background-color 0.2s var(--ease-soft);
 }
 
-.hero-ca-value:hover { background: rgba(13, 15, 18, 0.04); }
+.hero-ca-value:hover { background: rgb(var(--ink-rgb) / 0.04); }
 .hero-ca-value svg { flex: none; color: var(--ink-mute); }
 .hero-ca-full { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .hero-ca-short { display: none; }
@@ -291,7 +291,7 @@
   transition: color 0.2s var(--ease-soft), background-color 0.2s var(--ease-soft);
 }
 
-.hero-ca-link:hover { color: var(--shield); background: rgba(13, 15, 18, 0.04); }
+.hero-ca-link:hover { color: var(--shield); background: rgb(var(--ink-rgb) / 0.04); }
 
 .hero-ca-toast {
   position: absolute;
@@ -330,9 +330,9 @@
 .hero-stat {
   min-width: 232px;
   padding: var(--pad-medium);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgb(23 26 20 / 0.8);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.52);
+  background: rgb(23 26 20 / 0.72);
   backdrop-filter: blur(10px);
 }
 
@@ -361,16 +361,16 @@
   align-items: center;
   gap: var(--gap-tiny);
   padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgb(23 26 20 / 0.9);
   border-radius: var(--radius-round);
-  background: rgba(255, 255, 255, 0.52);
+  background: rgb(23 26 20 / 0.72);
   backdrop-filter: blur(10px);
   font-size: var(--fs-p-small);
   transition: background-color 0.24s var(--ease-soft);
 }
 
 .hero-scroll:hover {
-  background: rgba(255, 255, 255, 0.86);
+  background: rgb(23 26 20 / 0.92);
 }
 
 /* --- checkout demo -------------------------------------------------------- */
@@ -488,8 +488,8 @@
   color: var(--ink-faint);
 }
 
-.checkout-feed.is-live { color: #0b8c57; }
-.checkout-feed.is-stale { color: #96620a; }
+.checkout-feed.is-live { color: var(--settle-deep); }
+.checkout-feed.is-stale { color: var(--signal-deep); }
 .checkout-feed.is-error { color: var(--alert); }
 
 .checkout-copy {
@@ -537,7 +537,7 @@
 .checkout-expiry {
   font-size: var(--fs-p-tiny);
   letter-spacing: 0.04em;
-  color: #96620a;
+  color: var(--signal-deep);
 }
 
 .checkout-expiry.is-done {
@@ -583,7 +583,7 @@
 
 .checkout-receipt.is-live {
   border-style: solid;
-  border-color: rgba(18, 201, 126, 0.45);
+  border-color: rgb(var(--settle-rgb) / 0.45);
   background: var(--settle-wash);
 }
 
@@ -659,8 +659,8 @@
   padding: var(--pad-medium);
   border-radius: var(--radius);
   background: var(--white);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 1px 2px rgba(13, 15, 18, 0.04);
+  border: 1px solid rgb(23 26 20 / 0.92);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.088);
 }
 
 .step-art {
@@ -700,7 +700,7 @@
 
 .step-art-shield {
   position: relative;
-  border-color: rgba(110, 86, 248, 0.26);
+  border-color: rgb(var(--shield-rgb) / 0.26);
   background: var(--shield-wash);
 }
 
@@ -718,7 +718,7 @@
   font-size: 10px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #4b34d6;
+  color: var(--shield-deep);
 }
 
 .step-art-link {
@@ -891,7 +891,7 @@
   justify-content: center;
   gap: var(--gap-small);
   padding: var(--pad-xxl) var(--pad-xl);
-  background: linear-gradient(150deg, var(--shield-wash) 0%, #f7f6ff 40%, var(--settle-wash) 100%);
+  background: linear-gradient(150deg, var(--shield-wash) 0%, var(--shield-wash) 40%, var(--settle-wash) 100%);
 }
 
 .flow-stack {
@@ -907,7 +907,7 @@
   gap: var(--gap-small);
   padding: 14px 16px;
   border-radius: var(--radius-tiny);
-  background: rgba(255, 255, 255, 0.5);
+  background: rgb(23 26 20 / 0.7);
   color: var(--ink-mute);
   transition: background-color 0.24s var(--ease-soft);
 }
@@ -915,7 +915,7 @@
 .flow-row.is-active {
   background: var(--white);
   color: var(--ink);
-  box-shadow: 0 12px 28px -18px rgba(13, 15, 18, 0.4);
+  box-shadow: 0 12px 28px -18px rgb(0 0 0 / 0.85);
 }
 
 .flow-state {
@@ -955,7 +955,7 @@
   gap: 2px;
   padding: 8px 12px;
   border-radius: var(--radius-tiny);
-  background: rgba(255, 255, 255, 0.6);
+  background: rgb(23 26 20 / 0.8);
 }
 
 .flow-terminal .flow-state {
@@ -972,8 +972,8 @@
   display: grid;
   place-items: center;
   padding: var(--pad-xxl);
-  background: radial-gradient(120% 90% at 20% 20%, rgba(110, 86, 248, 0.28) 0%, transparent 60%),
-    radial-gradient(110% 90% at 85% 80%, rgba(18, 201, 126, 0.22) 0%, transparent 62%), #14171c;
+  background: radial-gradient(120% 90% at 20% 20%, rgb(var(--shield-rgb) / 0.28) 0%, transparent 60%),
+    radial-gradient(110% 90% at 85% 80%, rgb(var(--settle-rgb) / 0.22) 0%, transparent 62%), var(--night-deep);
 }
 
 .settle-art {
@@ -1070,15 +1070,15 @@
 }
 
 .privacy-slide--shield .privacy-figure {
-  background: linear-gradient(160deg, #efecff 0%, #f6f5ff 60%, #ffffff 100%);
+  background: linear-gradient(160deg, var(--shield-wash) 0%, var(--shield-wash) 60%, var(--on-accent) 100%);
 }
 
 .privacy-slide--settle .privacy-figure {
-  background: linear-gradient(160deg, #e6f9f1 0%, #f2fbf7 60%, #ffffff 100%);
+  background: linear-gradient(160deg, var(--settle-wash) 0%, var(--settle-wash) 60%, var(--on-accent) 100%);
 }
 
 .privacy-slide--signal .privacy-figure {
-  background: linear-gradient(160deg, #fff5e2 0%, #fffaf1 60%, #ffffff 100%);
+  background: linear-gradient(160deg, var(--signal-wash) 0%, var(--signal-wash) 60%, var(--on-accent) 100%);
 }
 
 .tone-art {
@@ -1195,9 +1195,9 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(56% 42% at 22% 0%, rgba(110, 86, 248, 0.42) 0%, transparent 68%),
-    radial-gradient(44% 34% at 76% 6%, rgba(18, 201, 126, 0.28) 0%, transparent 70%),
-    radial-gradient(70% 50% at 50% 100%, rgba(110, 86, 248, 0.12) 0%, transparent 70%);
+    radial-gradient(56% 42% at 22% 0%, rgb(var(--shield-rgb) / 0.42) 0%, transparent 68%),
+    radial-gradient(44% 34% at 76% 6%, rgb(var(--settle-rgb) / 0.28) 0%, transparent 70%),
+    radial-gradient(70% 50% at 50% 100%, rgb(var(--shield-rgb) / 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1227,7 +1227,7 @@
   margin-inline: auto;
   border: 1px solid var(--white-op-12);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgb(var(--ink-rgb) / 0.04);
   backdrop-filter: blur(14px);
   overflow: hidden;
 }
@@ -1327,7 +1327,7 @@
 }
 
 .code-text {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgb(23 26 20 / 0.92);
   white-space: pre-wrap;
   word-break: break-word;
   padding-right: var(--pad-medium);
@@ -1335,8 +1335,8 @@
 
 .tok-key { color: var(--shield-soft); }
 .tok-str { color: var(--settle-soft); }
-.tok-num { color: #ffcf6b; }
-.tok-lit { color: #ff9f8a; }
+.tok-num { color: var(--signal-deep); }
+.tok-lit { color: var(--alert-deep); }
 
 .code-foot {
   padding: var(--pad-small) var(--pad-medium);
@@ -1416,7 +1416,7 @@
   align-items: center;
   gap: var(--gap-small);
   padding: var(--pad-l);
-  border: 1px solid rgba(18, 201, 126, 0.4);
+  border: 1px solid rgb(var(--settle-rgb) / 0.4);
   border-radius: var(--radius);
   background: var(--settle-wash);
 }
@@ -1650,3 +1650,16 @@
   .hero-stat { flex: 1 1 100%; }
   .footer-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ==========================================================================
+   ZRail: band sections sink below the page instead of inverting.
+   ========================================================================== */
+.split--ink { background: var(--night-deep); color: var(--ink); border: 1px solid var(--line); }
+.integration { background: var(--night-deep); color: var(--ink); border-block: 1px solid var(--line); }
+/* blur lives on ::before: backdrop-filter on .nav itself would trap the fixed mobile menu inside the header */
+.nav { background: transparent; border-bottom: 1px solid var(--line); }
+.nav::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgb(var(--paper-rgb) / 0.88); backdrop-filter: blur(10px); }
+.hero-ca-key { background: var(--sodium); color: var(--on-accent); }
+.hero-ca-symbol { color: var(--on-accent); opacity: 0.7; }
+.hero-stat { border-color: var(--line-strong); }
+.hero-scroll { border-color: var(--line-strong); }

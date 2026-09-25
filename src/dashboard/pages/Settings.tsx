@@ -50,14 +50,14 @@ export function Settings() {
   const exportLedger = () => {
     const blob = new Blob([JSON.stringify(ledger, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
-    Object.assign(document.createElement('a'), { href: url, download: `zetanexus-ledger-${shortAddr(wallet, 6, 4)}.json` }).click();
+    Object.assign(document.createElement('a'), { href: url, download: `zrail-ledger-${shortAddr(wallet, 6, 4)}.json` }).click();
     URL.revokeObjectURL(url);
   };
 
   const importLedger = async (file: File) => {
     try {
       const ok = replaceLedger(wallet, JSON.parse(await file.text()));
-      setNotice(ok ? 'Ledger restored from backup.' : 'That file is not a ZetaNexus ledger backup.');
+      setNotice(ok ? 'Ledger restored from backup.' : 'That file is not a ZRail ledger backup.');
       if (ok) window.location.reload();
     } catch {
       setNotice('Could not read that file.');
@@ -72,14 +72,14 @@ export function Settings() {
 
   return (
     <>
-      <PageHead index="06" title="Settings" lede="Your store, where payouts land, and how ZetaNexus talks to your backend." />
+      <PageHead index="08" title="Settings" lede="Your store, where payouts land, and how ZRail talks to your backend." />
 
       <form className="dash-panel dash-form" onSubmit={save}>
         <PanelHead eyebrow="Store" title="Merchant profile" />
         <div className="dash-grid-2 dash-grid-2--tight">
           <label className="dash-field">
             <span className="access-label">Store name</span>
-            <input className="dash-input" value={name} onChange={(e) => setName(e.target.value)} maxLength={60} placeholder="ZetaNexus Demo Store" />
+            <input className="dash-input" value={name} onChange={(e) => setName(e.target.value)} maxLength={60} placeholder="ZRail Demo Store" />
           </label>
           <label className="dash-field">
             <span className="access-label">Default quote expiry (minutes)</span>
@@ -122,7 +122,7 @@ export function Settings() {
         <PanelHead eyebrow="Backend" title="Webhook" />
         <label className="dash-field">
           <span className="access-label">Webhook URL</span>
-          <input className="dash-input num" value={hook} onChange={(e) => setHook(e.target.value.trim())} placeholder="https://z2r-nexus.com/hooks/z2r" spellCheck={false} aria-invalid={!hookValid} />
+          <input className="dash-input num" value={hook} onChange={(e) => setHook(e.target.value.trim())} placeholder="https://your-store.com/hooks/zrail" spellCheck={false} aria-invalid={!hookValid} />
           {!hookValid ? <span className="dash-field-error">Use an https:// URL (http:// only for localhost).</span> : null}
         </label>
 

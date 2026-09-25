@@ -37,7 +37,7 @@ export function Navigation() {
   return (
     <header className="nav" ref={barRef}>
       <div className="container nav-inner">
-        <a className="nav-logo" href="#top" aria-label="ZetaNexus home">
+        <a className="nav-logo" href="#top" aria-label="ZRail home">
           <Logo />
         </a>
 

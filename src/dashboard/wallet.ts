@@ -28,7 +28,7 @@ if (walletReady) {
     defaultNetwork: robinhood,
     projectId: ENV.reownProjectId,
     metadata: {
-      name: 'ZetaNexus',
+      name: 'ZRail',
       description: 'Shielded ZEC checkout, settled on Robinhood Chain.',
       url: window.location.origin,
       icons: [`${window.location.origin}/brand/logo-mark-500.png`],
