@@ -67,7 +67,7 @@ export function useZzecBacking(): Backing {
   return b;
 }
 
-/* --- $ZRAIL contract checks ------------------------------------------------ */
+/* --- $ZKRAIL contract checks ------------------------------------------------ */
 
 /** Function selectors whose presence would break a "never" promise. */
 const FORBIDDEN: Record<string, string[]> = {

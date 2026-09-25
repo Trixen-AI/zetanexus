@@ -4,7 +4,7 @@ import { DEFAULT_TOKEN } from '../config';
 /**
  * The merchant ledger: profile + checkouts, one per connected wallet.
  *
- * There is no ZRail backend in this repo, so the ledger lives in the
+ * There is no ZKRail backend in this repo, so the ledger lives in the
  * merchant's own browser, keyed by their address and versioned so the shape can
  * change later without corrupting old data. Nothing here is invented: quotes
  * come from the live price feed, blocks from the chain, settlements from real
@@ -33,7 +33,7 @@ export type Checkout = {
   createdAt: number;
   createdBlock: string;
   expiresAt: number;
-  /** Issued by the ZRail API. Absent when no API is configured. */
+  /** Issued by the ZKRail API. Absent when no API is configured. */
   shieldedAddress?: string;
   apiId?: string;
   cancelledAt?: number;

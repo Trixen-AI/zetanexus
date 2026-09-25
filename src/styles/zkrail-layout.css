@@ -1,6 +1,6 @@
 /* ==========================================================================
-   ZRail merged layout: hero pillars, rail strip, three-flow tabs, the loop,
-   trust, and the final call to action. Loaded after zrail.css.
+   ZKRail merged layout: hero pillars, rail strip, three-flow tabs, the loop,
+   trust, and the final call to action. Loaded after zkrail.css.
    ========================================================================== */
 
 /* --- invisible-text fixes: "white" is the dark panel colour on this theme -- */
@@ -42,7 +42,7 @@
   transition: background-color 0.24s var(--ease-soft);
 }
 
-.hero-pillar:hover { background: rgb(23 26 20 / 0.95); }
+.hero-pillar:hover { background: rgb(23 23 24 / 0.95); }
 .hero-pillar-n { font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); }
 .hero-pillar-title { display: inline-flex; align-items: center; gap: 8px; font-size: var(--fs-h4); font-weight: 600; letter-spacing: -0.02em; }
 .hero-pillar-title svg { transition: transform 0.24s var(--ease-out); }

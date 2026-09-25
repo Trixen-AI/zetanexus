@@ -93,14 +93,14 @@ function RedeemPanel() {
 }
 
 /** Where this wallet stands against the payout rule. */
-function RulePanel({ zrailUsd }: { zrailUsd: number | null }) {
+function RulePanel({ zkrailUsd }: { zkrailUsd: number | null }) {
   const [held, setHeld] = useState('');
-  const value = zrailUsd ?? (held === '' ? null : Number(held));
+  const value = zkrailUsd ?? (held === '' ? null : Number(held));
   const ok = value !== null && value >= THRESHOLD_USD;
   return (
     <section className="dash-panel">
       <PanelHead eyebrow="The rule" title={`${RULE.terms[0].value} of $${TOKEN.symbol} to qualify`} />
-      {zrailUsd === null ? (
+      {zkrailUsd === null ? (
         <label className="dash-field">
           <span className="access-label">Your ${TOKEN.symbol} holding (USD)</span>
           <input className="dash-input num" inputMode="decimal" placeholder="e.g. 250" value={held} onChange={(e) => setHeld(e.target.value.replace(/[^0-9.]/g, ''))} />
@@ -129,7 +129,7 @@ function RulePanel({ zrailUsd }: { zrailUsd: number | null }) {
 /**
  * Holder earnings for the connected wallet, read from Robinhood Chain: zZEC
  * balance, every zZEC transfer into the wallet, and (once the token contract is
- * set in src/data/site.ts) the $ZRAIL balance. Redemption approval works today.
+ * set in src/data/site.ts) the $ZKRAIL balance. Redemption approval works today.
  */
 export function Earn() {
   const { wallet } = useMerchant();
@@ -162,7 +162,7 @@ export function Earn() {
 
   return (
     <>
-      <PageHead index="07" title="Earn" lede="Your zZEC as a $ZRAIL holder: balance, payouts received, and redemption back to ZEC." />
+      <PageHead index="07" title="Earn" lede="Your zZEC as a $ZKRAIL holder: balance, payouts received, and redemption back to ZEC." />
 
       <section className="dash-stats">
         <article className="dash-stat dash-stat--lead">
@@ -210,7 +210,7 @@ export function Earn() {
 
       <div className="dash-grid-2">
         <RedeemPanel />
-        <RulePanel zrailUsd={null} />
+        <RulePanel zkrailUsd={null} />
       </div>
 
       <section className="dash-panel dash-panel--flush">

@@ -7,8 +7,8 @@ import './styles/tokens.css';
 import './styles/base.css';
 import './styles/components.css';
 import './styles/sections.css';
-import './styles/zrail.css';
-import './styles/zrail-layout.css';
+import './styles/zkrail.css';
+import './styles/zkrail-layout.css';
 import App from './App';
 import { NotFound } from './NotFound';
 

@@ -419,6 +419,7 @@
   font-size: var(--fs-p-small);
   color: var(--ink-mute);
   letter-spacing: 0;
+  white-space: nowrap;
 }
 
 .dash-stat-note {
@@ -829,7 +830,7 @@ a.dash-row:hover { background: var(--surface-2); }
   padding: var(--pad-small);
   border-radius: var(--radius-tiny);
   background: var(--ink);
-  color: rgb(23 26 20 / 0.92);
+  color: rgb(23 23 24 / 0.92);
   font-family: var(--font-mono);
   font-size: 12px;
   line-height: 1.65;
@@ -881,7 +882,7 @@ a.dash-row:hover { background: var(--surface-2); }
   width: 100%;
   padding: var(--pad-medium);
   border-radius: var(--radius);
-  background: rgb(23 26 20 / 0.92);
+  background: rgb(23 23 24 / 0.92);
   border: 1px solid var(--line);
 }
 
@@ -948,7 +949,7 @@ a.dash-row:hover { background: var(--surface-2); }
   .dash-qr--lg { width: 100%; height: auto; max-width: 260px; }
 }
 
-/* ZRail: code and the chain chip sit on true night, not on bone */
+/* ZKRail: code and the chain chip sit on true night, not on bone */
 .dash-code { background: var(--night-deep); color: var(--ink-soft); border: 1px solid var(--line); }
 .dash-gate-facts li:first-child { background: #000000; color: var(--ink-mute); border: 1px solid var(--line-strong); }
 .dash-account { color: var(--on-accent); }

@@ -28,18 +28,18 @@ if (walletReady) {
     defaultNetwork: robinhood,
     projectId: ENV.reownProjectId,
     metadata: {
-      name: 'ZRail',
+      name: 'ZKRail',
       description: 'Shielded ZEC checkout, settled on Robinhood Chain.',
       url: window.location.origin,
       icons: [`${window.location.origin}/brand/logo-mark-500.png`],
     },
     features: { analytics: false, email: false, socials: false, swaps: false, onramp: false },
-    themeMode: 'light',
+    themeMode: 'dark',
     themeVariables: {
-      '--w3m-accent': '#6e56f8',
-      '--w3m-color-mix': '#0d0f12',
+      '--w3m-accent': '#f98500',
+      '--w3m-color-mix': '#0a0a0b',
       '--w3m-color-mix-strength': 4,
-      '--w3m-font-family': '"Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif',
+      '--w3m-font-family': '"Bricolage Grotesque Variable", "Bricolage Grotesque", system-ui, sans-serif',
       '--w3m-border-radius-master': '2px',
     },
   });

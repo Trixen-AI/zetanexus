@@ -195,7 +195,7 @@ export function Overview() {
       </div>
 
       <section className="dash-panel">
-        <PanelHead eyebrow="Settled through ZRail" title="Checkout volume" />
+        <PanelHead eyebrow="Settled through ZKRail" title="Checkout volume" />
         <p className="dash-big num">
           {fmtToken(settledVolume, token.decimals)} <span className="dash-stat-unit">{token.symbol}</span>
         </p>

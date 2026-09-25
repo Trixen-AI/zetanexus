@@ -1,10 +1,10 @@
 import { ENV } from '../config';
 
 /**
- * Client for the ZRail checkout API described on the website
+ * Client for the ZKRail checkout API described on the website
  * (POST /api/checkouts). That service is the liquidity-provider side: it issues
  * the shielded ZEC address. It is not part of this repo, so every call here is
- * gated on VITE_ZRAIL_API_URL and nothing is simulated when it is missing.
+ * gated on VITE_ZKRAIL_API_URL and nothing is simulated when it is missing.
  */
 
 export const apiConfigured = () => ENV.apiUrl.length > 0;
@@ -29,7 +29,7 @@ export type CreateCheckoutResponse = {
 export class ApiError extends Error {}
 
 export async function createRemoteCheckout(body: CreateCheckoutRequest): Promise<CreateCheckoutResponse> {
-  if (!apiConfigured()) throw new ApiError('VITE_ZRAIL_API_URL is not set');
+  if (!apiConfigured()) throw new ApiError('VITE_ZKRAIL_API_URL is not set');
   const res = await fetch(`${ENV.apiUrl}/api/checkouts`, {
     method: 'POST',
     headers: { 'content-type': 'application/json', accept: 'application/json' },

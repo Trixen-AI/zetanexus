@@ -1,12 +1,12 @@
 {
-  "name": "ZRail",
-  "short_name": "ZRail",
+  "name": "ZKRail",
+  "short_name": "ZKRail",
   "description": "Spend in the shade. Settle in the open. Earn it back in zZEC.",
   "start_url": "/app",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0c0d0b",
-  "theme_color": "#0c0d0b",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
   "icons": [
     {
       "src": "/brand/icon-192.png",

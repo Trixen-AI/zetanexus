@@ -1,11 +1,11 @@
-# ZRail
+# ZKRail
 
 Spend ZEC in the shade. Settle it in the open.
 
 A shielded Zcash economy on Robinhood Chain, built as React + Vite + TypeScript:
 
 - **The market**: eSIM data, AI credit, servers, VPN, proxies and domains, priced in dollars and paid in shielded ZEC.
-- **Holder payouts**: part of every $ZRAIL trading fee is converted to zZEC and pushed to qualifying holders.
+- **Holder payouts**: part of every $ZKRAIL trading fee is converted to zZEC and pushed to qualifying holders.
 - **Merchant checkout**: accept shielded ZEC and settle each order as a public payout on Robinhood Chain.
 
 ```bash
@@ -57,25 +57,25 @@ checkout, and payouts from before a checkout existed are never attached to it.
 (`0x5fc5...d168`, 6 decimals, verified on-chain).
 
 **What needs a backend.** Shielded ZEC addresses come from the liquidity-provider API
-(`POST /api/checkouts`). Set `VITE_ZRAIL_API_URL` and new checkouts carry one; until then the
+(`POST /api/checkouts`). Set `VITE_ZKRAIL_API_URL` and new checkouts carry one; until then the
 dashboard says so and never generates an address in the browser. Checkouts are stored per wallet
 in the browser (versioned, exportable in Settings) because there is no server-side store yet.
 
 **Environment** (`.env`, see `.env.example`): `VITE_REOWN_PROJECT_ID` (required for wallets),
-`VITE_ZRAIL_API_URL` (optional), `VITE_RHC_RPC_URL` (optional). Reads fail over to a second
+`VITE_ZKRAIL_API_URL` (optional), `VITE_RHC_RPC_URL` (optional). Reads fail over to a second
 public RPC when the official one returns a malformed CORS header.
 
 **Hosting:** client-side routes need an SPA fallback (every path serves `index.html`).
 
 ## Design direction
 
-A night market lit by sodium lamps. Dark ground, bone type, square-cut ticket panels and
-registration marks around the viewport.
+The zats.market palette on a dark ground, with square-cut ticket panels and registration marks
+around the viewport.
 
-- **Night** `#0c0d0b` ground, **bone** `#ebe8d8` type
-- **Verdigris** `#7cc4ad` for everything shielded (the private leg)
-- **Sodium** `#ff6a2c` for everything settled in public, and for primary actions
-- **Brass** `#d6ae62` for payouts and time (backing ratio, expiry)
+- **Black** `#0a0a0b` ground, **white** `#ffffff` type, **anthracite** `#232323` and **graphite** `#323232` panels and lines, **grey** `#999999` / `#6b6b6b` secondary text
+- **Mint** `#71cfa3` for everything shielded (the private leg)
+- **Orange** `#f98500` for everything settled in public, and for primary actions
+- **Sky** `#bcefff` for payouts and time (backing ratio, expiry)
 - **Bricolage Grotesque** for display and UI, **Martian Mono** for labels, figures and code
 
 Frame devices, all in `src/styles/components.css`: `.frame` (viewport registration marks),
@@ -88,10 +88,10 @@ Frame devices, all in `src/styles/components.css`: `.frame` (viewport registrati
 | ZEC price | CoinGecko, Coinbase fallback | Live |
 | zZEC backing | ZEAL reserve API + zZEC `totalSupply` on chain | Live |
 | zZEC balances, payouts, redeem approval | Robinhood Chain + ZEAL redemption desk | Live |
-| $ZRAIL CA row | `CONTRACTS.token` in `src/data/site.ts` | Hidden until the address is set |
-| "Never" checks (mint, blacklist, pause, upgrade, fee, team tokens) | $ZRAIL bytecode, curve and deployer balance | Run automatically once the token address is set |
+| $ZKRAIL CA row | `CONTRACTS.token` in `src/data/site.ts` | Hidden until the address is set |
+| "Never" checks (mint, blacklist, pause, upgrade, fee, team tokens) | $ZKRAIL bytecode, curve and deployer balance | Run automatically once the token address is set |
 | Market approval | `CONTRACTS.market` | Approve button enables once the address is set |
-| Shielded checkout addresses | `VITE_ZRAIL_API_URL` | Issued by the checkout API when set |
+| Shielded checkout addresses | `VITE_ZKRAIL_API_URL` | Issued by the checkout API when set |
 
 zZEC is issued by ZEAL, an independent project (github.com/zealtoken/zealtoken). Token
 `0x0b151Ff7a7c5250130EC16C275790961d558E402`, 8 decimals. Redemption desk
@@ -99,9 +99,10 @@ zZEC is issued by ZEAL, an independent project (github.com/zealtoken/zealtoken).
 
 ## The logo
 
-An "N" laid as two rails inside a square-cut frame (the same notch as the ticket panels). The
-dashed verdigris rail is the shielded leg, the solid bone diagonal and rail are the payment
-settling in public, and a sodium lamp hangs over the public rail.
+A "ZK" monogram laid as a rail junction on a square-cut tile (the same notch as the ticket
+panels). The Z and the K's stem are the rail, in white; the K's arms are the fork where one
+payment splits: mint for the shielded ZEC leg, orange for the leg that settles in public. The tile
+is always dark, so the mark reads the same on light and dark backgrounds.
 
 `npm run logo` regenerates every output from one source (fonts in `scripts/fonts/`, OFL):
 
@@ -134,7 +135,7 @@ They identify the assets a payment touches. The Zcash brandmark's viewBox is cro
 
 ## Links and domain
 
-Main domain: `https://zrail.app`. The only social link is X, `https://x.com/ZRail_`
+Main domain: `https://zkrail-protocol.com`. The only social link is X, `https://x.com/ZKRail_`
 (`FOOTER.community` in `src/data/site.ts`). Checkout and webhook examples use `your-store.com`,
 because they stand for the merchant's own server.
 
@@ -162,9 +163,9 @@ redirects pointing at each other loop every `/assets` request and the app never 
 1. Vercel > Add New > Project > import `Trixen-AI/zetanexus`. Framework, build command and output
    directory are read from `vercel.json`.
 2. Add the environment variables below (Production, and Preview if you use it), then deploy.
-3. Settings > Domains: add `zrail.app` and `www.zrail.app`, then point DNS as Vercel shows. Make
-   `zrail.app` the primary (Edit `www.zrail.app` > Redirect to `zrail.app`) so it matches the canonical URL.
-4. In https://dashboard.reown.com, add `zrail.app` (and your `*.vercel.app` preview domain) to the
+3. Settings > Domains: add `zkrail-protocol.com` and `www.zkrail-protocol.com`, then point DNS as Vercel shows. Make
+   `zkrail-protocol.com` the primary (Edit `www.zkrail-protocol.com` > Redirect to `zkrail-protocol.com`) so it matches the canonical URL.
+4. In https://dashboard.reown.com, add `zkrail-protocol.com`, `www.zkrail-protocol.com` (and your `*.vercel.app` preview domain) to the
    project's allowed domains, or the wallet modal is refused in production.
 
 ## Environment
@@ -175,7 +176,7 @@ build time, so redeploy after changing any of them.
 | Variable | Required | Purpose |
 |---|---|---|
 | `VITE_REOWN_PROJECT_ID` | yes | Wallet connect modal (Reown AppKit) |
-| `VITE_ZRAIL_API_URL` | when ready | Checkout API that issues shielded ZEC addresses |
+| `VITE_ZKRAIL_API_URL` | when ready | Checkout API that issues shielded ZEC addresses |
 | `VITE_RHC_RPC_URL` | no | Robinhood Chain RPC override (defaults to the public endpoint) |
 
 Contract addresses are not environment variables: paste them into `CONTRACTS` in

@@ -1,23 +1,29 @@
 import { WORDMARK_CAP, WORDMARK_DESCENDER, WORDMARK_GLYPHS, WORDMARK_WIDTH } from './logo-paths';
 
 /**
- * The ZRail lockup, inline.
+ * The ZKRail lockup, inline.
  *
- * Mark: a "Z" laid as a rail inside a square-cut frame. The dashed verdigris top
- * rail is the shielded ZEC leg; the solid bone diagonal and bottom rail are the
- * payment settling in public; the sodium lamp marks the receipt.
+ * Mark: a "ZK" monogram laid as a rail junction on a square-cut tile. The Z and
+ * the K's stem are the rail, in white; the K's arms are the fork where one payment
+ * splits: mint for the shielded ZEC leg, orange for the leg that settles in public.
+ * The tile is always dark, so the mark reads the same on any background.
  * Geometry matches scripts/build-logo.mjs. Size is set in CSS (height).
  */
 
-const FRAME = 'M9 1.5H39L46.5 9V39L39 46.5H9L1.5 39V9Z';
+const TILE = 'M8 0H40L48 8V40L40 48H8L0 40V8Z';
+const EDGE = 'M8.3 0.75H39.7L47.25 8.3V39.7L39.7 47.25H8.3L0.75 39.7V8.3Z';
 
 function MarkShapes() {
   return (
     <>
-      <path d={FRAME} fill="none" stroke="var(--logo-ink, var(--ink))" strokeWidth="2.6" strokeLinejoin="miter" />
-      <path d="M13 14H35" fill="none" stroke="var(--logo-rail, var(--verdigris))" strokeWidth="3.8" strokeDasharray="4.4 3.2" />
-      <path d="M35 14L14 34H28" fill="none" stroke="var(--logo-ink, var(--ink))" strokeWidth="3.8" strokeLinejoin="miter" strokeLinecap="square" />
-      <circle cx="34.5" cy="34" r="3.6" fill="var(--logo-lamp, var(--sodium))" />
+      <path d={TILE} fill="var(--panel)" />
+      <path d={EDGE} fill="none" stroke="var(--graphite)" strokeWidth="1.5" />
+      <g fill="none" strokeWidth="4.4" strokeLinejoin="miter">
+        <path d="M27 25L40 14" stroke="var(--verdigris)" />
+        <path d="M30 22.46L40 34" stroke="var(--sodium)" />
+        <path d="M8 14H19L8 34H19" stroke="var(--bone)" strokeLinecap="square" />
+        <path d="M27 14V34" stroke="var(--bone)" strokeLinecap="square" />
+      </g>
     </>
   );
 }
@@ -43,7 +49,7 @@ export function Logo({ className }: { className?: string }) {
   const markY = (boxH - markSize) / 2;
   const baseline = markY + markSize / 2 + WORDMARK_CAP / 2;
   return (
-    <svg className={['logo', className].filter(Boolean).join(' ')} viewBox={`0 0 ${totalW.toFixed(2)} ${boxH.toFixed(2)}`} role="img" aria-label="ZRail">
+    <svg className={['logo', className].filter(Boolean).join(' ')} viewBox={`0 0 ${totalW.toFixed(2)} ${boxH.toFixed(2)}`} role="img" aria-label="ZKRail">
       <g transform={`translate(0 ${markY.toFixed(2)}) scale(${markScale.toFixed(4)})`}>
         <MarkShapes />
       </g>
@@ -74,12 +80,12 @@ export function LogoWatermark() {
       style={{ width: '100%', height: 'auto', display: 'block', overflow: 'visible' }}
     >
       <defs>
-        <linearGradient id="zr-watermark" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id="zk-watermark" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="var(--line-strong)" />
           <stop offset="100%" stopColor="var(--paper)" />
         </linearGradient>
       </defs>
-      <g transform={`translate(0 ${WORDMARK_CAP.toFixed(2)})`} fill="url(#zr-watermark)">
+      <g transform={`translate(0 ${WORDMARK_CAP.toFixed(2)})`} fill="url(#zk-watermark)">
         <Glyphs />
       </g>
     </svg>

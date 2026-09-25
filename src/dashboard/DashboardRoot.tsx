@@ -45,7 +45,7 @@ function GateFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="dash-gate">
       <header className="dash-gate-bar container">
-        <Link to="/" className="nav-logo" aria-label="ZRail website">
+        <Link to="/" className="nav-logo" aria-label="ZKRail website">
           <Logo />
         </Link>
         <Link to="/" className="btn btn--ghost btn--sm">
@@ -69,7 +69,7 @@ function ConnectScreen() {
       <p className="eyebrow">Merchant dashboard</p>
       <h1 className="dash-gate-title">Connect the wallet that receives your payouts.</h1>
       <p className="lede">
-        ZRail pays merchants on {CHAIN_NAME}. Connect the address your settlements land on to create checkouts, watch
+        ZKRail pays merchants on {CHAIN_NAME}. Connect the address your settlements land on to create checkouts, watch
         payouts arrive and reconcile orders against the chain.
       </p>
       <div className="hero-actions">
@@ -141,7 +141,7 @@ function Shell() {
     <div className="dash">
       <aside className={`dash-side${menu ? ' is-open' : ''}`}>
         <div className="dash-side-top">
-          <Link to="/app" className="nav-logo" aria-label="ZRail dashboard home">
+          <Link to="/app" className="nav-logo" aria-label="ZKRail dashboard home">
             <Logo />
           </Link>
         </div>
@@ -183,7 +183,7 @@ function TopBar({ menu, onMenu }: { menu: boolean; onMenu: () => void }) {
       <button type="button" className="dash-burger" onClick={onMenu} aria-label={menu ? 'Close menu' : 'Open menu'} aria-expanded={menu}>
         {menu ? <IconClose /> : <IconMenu />}
       </button>
-      <Link to="/app" className="nav-logo dash-top-logo" aria-label="ZRail dashboard home">
+      <Link to="/app" className="nav-logo dash-top-logo" aria-label="ZKRail dashboard home">
         <Logo />
       </Link>
       <div className="dash-top-right">

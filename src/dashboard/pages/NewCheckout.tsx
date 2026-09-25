@@ -61,7 +61,7 @@ export function NewCheckout() {
 
       if (apiConfigured()) {
         const remote = await createRemoteCheckout({
-          merchant_name: ledger.profile.merchantName || 'ZRail merchant',
+          merchant_name: ledger.profile.merchantName || 'ZKRail merchant',
           order_ref: checkout.orderRef,
           payout_amount: checkout.payout,
           payout_asset: token.symbol,
@@ -189,8 +189,8 @@ export function NewCheckout() {
           <div className={`dash-api-note${apiConfigured() ? ' is-on' : ''}`}>
             <IconLock size={13} />
             {apiConfigured()
-              ? 'The ZRail API will issue a single-use shielded address for this checkout.'
-              : 'No checkout API configured: this checkout gets a quote and on-chain settlement tracking, but no shielded ZEC address until VITE_ZRAIL_API_URL is set.'}
+              ? 'The ZKRail API will issue a single-use shielded address for this checkout.'
+              : 'No checkout API configured: this checkout gets a quote and on-chain settlement tracking, but no shielded ZEC address until VITE_ZKRAIL_API_URL is set.'}
           </div>
           {!priceOk ? <p className="dash-field-error">Waiting for a live ZEC price before a quote can be locked.</p> : null}
         </aside>

@@ -53,7 +53,7 @@ export function Checkouts() {
   const exportCsv = () => {
     const blob = new Blob([toCsv(rows)], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
-    const a = Object.assign(document.createElement('a'), { href: url, download: `zrail-checkouts-${Date.now()}.csv` });
+    const a = Object.assign(document.createElement('a'), { href: url, download: `zkrail-checkouts-${Date.now()}.csv` });
     a.click();
     URL.revokeObjectURL(url);
   };

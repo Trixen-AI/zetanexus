@@ -1,64 +1,67 @@
-/* ZRail design tokens.
-   A night market lit by sodium lamps: warm near-black ground, bone type,
-   verdigris for everything that stays shielded, sodium orange for everything
-   that settles in public, brass for payouts and time.
+/* ZKRail design tokens.
+   Palette taken from zats.market: near-black ground (#0a0a0b), white type,
+   anthracite and graphite panels, orange (#f98500) for everything that settles
+   in public and for the main calls to action, mint (#71cfa3) for everything that
+   stays shielded, sky (#bcefff) for zZEC payouts and time.
 
    Semantic names are kept from the first build so every component follows the
-   new palette: `--ink` is now the foreground (bone), `--paper` the ground (night),
+   palette: `--ink` is the foreground (white), `--paper` the ground (black),
    `--white` the raised panel. Geometry (spacing, type scale, breakpoints) is
    unchanged. */
 
 :root {
   color-scheme: dark;
 
-  /* --- raw palette ---------------------------------------------------- */
-  --night: #0c0d0b;
-  --night-deep: #080907;
-  --soot: #12140f;
-  --panel: #171a14;
-  --panel-2: #1d2019;
-  --bone: #ebe8d8;
-  --sodium: #ff6a2c;
-  --verdigris: #7cc4ad;
-  --brass: #d6ae62;
+  /* --- raw palette (zats.market) -------------------------------------- */
+  --night: #0a0a0b;        /* black */
+  --night-deep: #050506;
+  --soot: #111112;
+  --panel: #171718;
+  --panel-2: #232323;      /* anthracite */
+  --graphite: #323232;
+  --bone: #ffffff;         /* white */
+  --mist: #f3f3f3;
+  --sodium: #f98500;       /* accent orange */
+  --verdigris: #71cfa3;    /* mint */
+  --brass: #bcefff;        /* sky */
 
   /* rgb triplets, for translucent tints: rgb(var(--x-rgb) / 0.2) */
-  --ink-rgb: 235 232 216;
-  --paper-rgb: 12 13 11;
-  --shield-rgb: 124 196 173;
-  --settle-rgb: 255 106 44;
-  --signal-rgb: 214 174 98;
+  --ink-rgb: 255 255 255;
+  --paper-rgb: 10 10 11;
+  --shield-rgb: 113 207 163;
+  --settle-rgb: 249 133 0;
+  --signal-rgb: 188 239 255;
   --alert-rgb: 255 90 79;
 
   /* --- semantic roles ------------------------------------------------- */
   --ink: var(--bone);
-  --ink-soft: #d0cdbd;
-  --ink-mute: #a3a391;
-  --ink-faint: #6f7163;
+  --ink-soft: #dcdcdc;
+  --ink-mute: #999999;     /* grey */
+  --ink-faint: #6b6b6b;    /* grey-deep */
 
   --paper: var(--night);
-  --surface: #191c16;
+  --surface: #1b1b1c;
   --surface-2: var(--soot);
-  --line: #292d24;
-  --line-strong: #3a3f33;
+  --line: #262627;
+  --line-strong: var(--graphite);
 
   --white: var(--panel);
   --black: #000000;
-  --on-accent: #120a05;
+  --on-accent: #0a0a0b;
 
   /* shielded side (private) */
   --shield: var(--verdigris);
-  --shield-soft: #a9dccb;
-  --shield-deep: #9fd8c5;
+  --shield-soft: #a8e3c8;
+  --shield-deep: #93dcba;
   --shield-wash: rgb(var(--shield-rgb) / 0.1);
   /* settled side (public, on-chain) */
   --settle: var(--sodium);
-  --settle-soft: #ff9a68;
-  --settle-deep: #ff8a52;
+  --settle-soft: #ffb35c;
+  --settle-deep: #ffa133;
   --settle-wash: rgb(var(--settle-rgb) / 0.1);
   /* payouts and time */
   --signal: var(--brass);
-  --signal-deep: #e7c585;
+  --signal-deep: #d9f6ff;
   --signal-wash: rgb(var(--signal-rgb) / 0.12);
   --alert: #ff5a4f;
   --alert-deep: #ff8a82;

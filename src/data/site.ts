@@ -1,10 +1,10 @@
-/** All ZRail copy and list data. One place, so wording is edited once. */
+/** All ZKRail copy and list data. One place, so wording is edited once. */
 
 export const BRAND = {
-  name: 'ZRail',
+  name: 'ZKRail',
   tagline: 'Spend in the shade. Settle in the open. Earn it back in zZEC.',
   description:
-    'ZRail is one shielded Zcash rail on Robinhood Chain: a private market, merchant checkout that settles in public, and zZEC payouts for $ZRAIL holders.',
+    'ZKRail is one shielded Zcash rail on Robinhood Chain: a private market, merchant checkout that settles in public, and zZEC payouts for $ZKRAIL holders.',
 };
 
 /**
@@ -13,7 +13,7 @@ export const BRAND = {
  * switches on by itself. Empty strings keep those parts out of the page.
  */
 export const CONTRACTS = {
-  /** $ZRAIL token on Robinhood Chain. */
+  /** $ZKRAIL token on Robinhood Chain. */
   token: '',
   /** zZEC distributor that pays holders. */
   distributor: '',
@@ -24,14 +24,14 @@ export const CONTRACTS = {
 const isAddress = (a: string) => /^0x[0-9a-fA-F]{40}$/.test(a);
 
 export const TOKEN = {
-  symbol: 'ZRAIL',
+  symbol: 'ZKRAIL',
   contract: isAddress(CONTRACTS.token) ? CONTRACTS.token : '',
   explorerBase: 'https://robinhoodchain.blockscout.com/token/',
 };
 
 /** The demo merchant used in every checkout example on the page. */
 export const DEMO = {
-  merchant: 'ZRail Demo Store',
+  merchant: 'ZKRail Demo Store',
   order: 'ZR-ORD-0042',
   /** Merchant payout per demo checkout, in USDC. The ZEC side is priced live. */
   payoutUsd: 250,
@@ -81,13 +81,13 @@ export const HERO = {
   eyebrow: 'Shielded Zcash, on Robinhood Chain',
   headingLines: ['Spend in the shade.', 'Settle in the open.', 'Earn it back in zZEC.'],
   lede:
-    'ZRail is one shielded Zcash rail. Shoppers pay the market in private ZEC, merchants take ZEC and settle each order as a public receipt, and $ZRAIL holders receive part of the fees as zZEC.',
+    'ZKRail is one shielded Zcash rail. Shoppers pay the market in private ZEC, merchants take ZEC and settle each order as a public receipt, and $ZKRAIL holders receive part of the fees as zZEC.',
   primary: { label: 'Open the app', href: '/app' },
   secondary: { label: 'See how it connects', href: '#loop' },
   pillars: [
     { n: '01', key: 'spend', title: 'Spend', body: 'eSIM, AI credit, servers, VPN, proxies and domains, paid in shielded ZEC.' },
     { n: '02', key: 'settle', title: 'Settle', body: 'Take ZEC from customers and settle every order as a public payout.' },
-    { n: '03', key: 'earn', title: 'Earn', body: 'Hold $ZRAIL and receive trading fees as zZEC, backed by real ZEC.' },
+    { n: '03', key: 'earn', title: 'Earn', body: 'Hold $ZKRAIL and receive trading fees as zZEC, backed by real ZEC.' },
   ],
 };
 
@@ -141,7 +141,7 @@ export const FLOWS = {
     { key: 'earn', label: 'Earn', who: 'For holders' },
   ] as const,
   earnSteps: [
-    { n: '01', title: 'Fee', tag: '', body: 'A cut of each $ZRAIL buy and sell is set aside.' },
+    { n: '01', title: 'Fee', tag: '', body: 'A cut of each $ZKRAIL buy and sell is set aside.' },
     { n: '02', title: 'Convert', tag: '', body: 'That cut is swapped into zZEC and parked in the distributor.' },
     { n: '03', title: 'Share', tag: 'Automatic', body: 'Qualifying wallets get a slice sized to their holding.' },
     { n: '04', title: 'Send', tag: 'One way', body: 'Slices go out once they outweigh the gas it costs to deliver them.' },
@@ -174,7 +174,7 @@ export const LOOP = {
   steps: [
     { n: '01', tone: 'shield' as const, title: 'Pay in the shade', body: 'A shopper or a customer sends shielded ZEC. Sender, amount and memo stay encrypted on Zcash.' },
     { n: '02', tone: 'settle' as const, title: 'Settle in the open', body: 'The payout lands on Robinhood Chain as an ordinary transaction anyone can look up.' },
-    { n: '03', tone: 'signal' as const, title: 'Fees become zZEC', body: 'Trading fees on $ZRAIL are swapped into zZEC and handed to the distributor.' },
+    { n: '03', tone: 'signal' as const, title: 'Fees become zZEC', body: 'Trading fees on $ZKRAIL are swapped into zZEC and handed to the distributor.' },
     { n: '04', tone: 'shield' as const, title: 'Back to holders', body: 'Holders receive zZEC, redeem it for ZEC or spend it at the market, and the loop starts again.' },
   ],
 };
@@ -221,7 +221,7 @@ export const PRIVACY = {
 export const TRUST = {
   eyebrow: 'Check it yourself',
   heading: 'Nothing here needs taking on faith.',
-  lede: 'The reserve behind zZEC, what each party can see, and what the $ZRAIL contract is built unable to do.',
+  lede: 'The reserve behind zZEC, what each party can see, and what the $ZKRAIL contract is built unable to do.',
   never: ['Mint', 'Blacklist', 'Pause', 'Upgrade', 'Raise the fee', 'Hold team tokens'],
 };
 
@@ -252,7 +252,7 @@ export function integrationTabs(zec: string | null) {
   "payout_amount": "${DEMO.payoutUsd.toFixed(2)}",
   "payout_asset": "USDC",
   "settlement_address": "0x742d...4e29",
-  "webhook_url": "https://your-store.com/hooks/zrail"
+  "webhook_url": "https://your-store.com/hooks/zkrail"
 }`,
     },
     {
@@ -297,7 +297,7 @@ export const WEBHOOK_SAMPLE = `{
 
 export const CLOSING = {
   line: 'Earn it. Spend it. Keep it quiet.',
-  lede: 'Hold $ZRAIL for zZEC, spend shielded ZEC at the market, and let your own customers pay you in ZEC that settles in public.',
+  lede: 'Hold $ZKRAIL for zZEC, spend shielded ZEC at the market, and let your own customers pay you in ZEC that settles in public.',
 };
 
 export const ACCESS = {
@@ -344,7 +344,7 @@ export const FOOTER = {
   ],
   community: {
     title: 'Community',
-        links: [{ label: 'X', href: 'https://x.com/ZRail_' }],
+        links: [{ label: 'X', href: 'https://x.com/ZKRail_' }],
   },
   company: {
     title: 'Company',

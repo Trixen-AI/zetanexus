@@ -40,7 +40,7 @@ export function Developers() {
     2,
   );
   // No invented host: until the API URL is configured the example says so.
-  const base = ENV.apiUrl || '<VITE_ZRAIL_API_URL>';
+  const base = ENV.apiUrl || '<VITE_ZKRAIL_API_URL>';
   const curl = `curl -X POST '${base}/api/checkouts' \\
   -H 'content-type: application/json' \\
   --data '${request.replace(/'/g, `'\\''`)}'`;
@@ -64,7 +64,7 @@ export function Developers() {
 
   return (
     <>
-      <PageHead index="05" title="Developers" lede="Wire ZRail into your backend: create checkouts over the API and verify signed webhooks." />
+      <PageHead index="05" title="Developers" lede="Wire ZKRail into your backend: create checkouts over the API and verify signed webhooks." />
 
       <div className="dash-grid-2">
         <section className="dash-panel">
@@ -78,7 +78,7 @@ export function Developers() {
               )}
             </KV>
             <KV k="API base URL">
-              <span className="num dash-break">{ENV.apiUrl || 'VITE_ZRAIL_API_URL is empty'}</span>
+              <span className="num dash-break">{ENV.apiUrl || 'VITE_ZKRAIL_API_URL is empty'}</span>
             </KV>
             <KV k="Chain">
               <span className="num">Robinhood Chain · {CHAIN_ID}</span>
@@ -94,7 +94,7 @@ export function Developers() {
           </div>
           {!apiConfigured() ? (
             <p className="dash-note">
-              Shielded ZEC addresses come from the checkout API. Set <code>VITE_ZRAIL_API_URL</code> in <code>.env</code> and
+              Shielded ZEC addresses come from the checkout API. Set <code>VITE_ZKRAIL_API_URL</code> in <code>.env</code> and
               restart; new checkouts will then carry a single-use shielded address.
             </p>
           ) : null}
@@ -112,7 +112,7 @@ export function Developers() {
             </Link>
           </div>
           <p className="dash-note">
-            Every webhook carries <code>x-zrail-signature: sha256=&lt;hex&gt;</code>, an HMAC-SHA256 of the raw body with this
+            Every webhook carries <code>x-zkrail-signature: sha256=&lt;hex&gt;</code>, an HMAC-SHA256 of the raw body with this
             secret. Compare in constant time before trusting the body.
           </p>
         </section>

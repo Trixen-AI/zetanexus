@@ -19,7 +19,7 @@ function useQr(value: string | null) {
       setSrc(null);
       return;
     }
-    QRCode.toDataURL(value, { margin: 1, width: 320, color: { dark: '#0d0f12', light: '#ffffff' }, errorCorrectionLevel: 'M' })
+    QRCode.toDataURL(value, { margin: 1, width: 320, color: { dark: '#0a0a0b', light: '#ffffff' }, errorCorrectionLevel: 'M' })
       .then((url) => alive && setSrc(url))
       .catch(() => alive && setSrc(null));
     return () => {
@@ -164,7 +164,7 @@ function Detail({ checkoutId, checkouts, now, merchantName, webhookUrl, secret, 
               <IconLock size={13} />
               {apiConfigured()
                 ? 'The API did not return a shielded address for this checkout.'
-                : 'Shielded addresses are issued by the ZRail checkout API (the liquidity-provider side). Set VITE_ZRAIL_API_URL to issue them; nothing is generated in the browser.'}
+                : 'Shielded addresses are issued by the ZKRail checkout API (the liquidity-provider side). Set VITE_ZKRAIL_API_URL to issue them; nothing is generated in the browser.'}
             </div>
           )}
         </section>
@@ -308,7 +308,7 @@ function Detail({ checkoutId, checkouts, now, merchantName, webhookUrl, secret, 
           <code>{body}</code>
         </pre>
         <div className="dash-inline">
-          <span className="mock-label">x-zrail-signature</span>
+          <span className="mock-label">x-zkrail-signature</span>
           <span className="num dash-break">{signature || '...'}</span>
           {signature ? <CopyButton value={signature} compact /> : null}
         </div>

@@ -1,5 +1,5 @@
 /**
- * Marks for the assets and networks a ZRail payment actually touches.
+ * Marks for the assets and networks a ZKRail payment actually touches.
  *
  * Every mark here is the brand's own official SVG, inlined unmodified and only
  * resized. They identify the assets involved in a payment; they are not a claim

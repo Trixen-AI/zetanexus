@@ -86,7 +86,7 @@ function EarnPanel() {
       </ol>
       <div className="flow-earn-side">
         <p className="flow-earn-rule">
-          <span className="num">{RULE.terms[0].value}</span> of $ZRAIL puts you on the list.
+          <span className="num">{RULE.terms[0].value}</span> of $ZKRAIL puts you on the list.
         </p>
         {RULE.terms.map((t) => (
           <div className="rule-term ticket" key={t.label}>
@@ -140,7 +140,7 @@ export function Flows() {
           <p className="lede reveal">{FLOWS.lede}</p>
         </div>
 
-        <div className="flows-tabs reveal" role="tablist" aria-label="ZRail flows">
+        <div className="flows-tabs reveal" role="tablist" aria-label="ZKRail flows">
           {FLOWS.tabs.map((t) => (
             <button
               key={t.key}

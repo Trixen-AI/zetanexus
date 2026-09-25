@@ -1,12 +1,13 @@
 /**
- * Builds the ZRail brand files from one source.
+ * Builds the ZKRail brand files from one source.
  *
- * Mark : a "Z" laid as a rail inside a square-cut frame (the same notched corner
- *        the UI uses on its ticket panels). The top rail is dashed verdigris: the
- *        shielded ZEC leg, present but unreadable. The diagonal and the bottom
- *        rail are solid bone: the payment settling in public on Robinhood Chain.
- *        A sodium lamp marks the receipt at the end of the public rail.
- * Word : "ZRail" in Bricolage Grotesque 700, outlined to <path>s.
+ * Mark : a "ZK" monogram laid as a rail junction on a square-cut tile (the same
+ *        notched corner the UI uses on its ticket panels). The Z and the K's stem
+ *        are the rail itself, in white. The K's two arms are the fork where one
+ *        payment splits: the upper arm is mint, the shielded ZEC leg; the lower
+ *        arm branches off it in orange, the leg that settles in public.
+ * Word : "ZKRail" in Bricolage Grotesque 700, outlined to <path>s.
+ * Colour: the zats.market palette in src/styles/tokens.css.
  *
  * Keep the geometry here in step with src/brand/Logo.tsx.
  *
@@ -26,23 +27,31 @@ const out = (f) => resolve(root, 'public/brand', f);
 mkdirSync(resolve(root, 'public/brand'), { recursive: true });
 
 /* --- palette (kept in step with src/styles/tokens.css) -------------------- */
-const NIGHT = '#0c0d0b';
-const BONE = '#ebe8d8';
-const SODIUM = '#ff6a2c';
-const VERDIGRIS = '#7cc4ad';
-const DARK_INK = '#12140f'; // for the light-background variant
-const DARK_VERDIGRIS = '#3f8f78';
+const NIGHT = '#0a0a0b'; // black
+const PANEL = '#171718';
+const GRAPHITE = '#323232';
+const WHITE = '#ffffff';
+const GREY = '#999999';
+const ORANGE = '#f98500';
+const MINT = '#71cfa3';
 
 /* --- 1. the mark, on a 48x48 grid ----------------------------------------- */
-const FRAME = 'M9 1.5H39L46.5 9V39L39 46.5H9L1.5 39V9Z';
-const mark = ({ ink, rail, lamp }, { solidRail = false, sw = 3.2 } = {}) => `
-  <path d="${FRAME}" fill="none" stroke="${ink}" stroke-width="2.6" stroke-linejoin="miter" />
-  <path d="M13 14H35" fill="none" stroke="${rail}" stroke-width="${sw + 0.6}" ${solidRail ? '' : 'stroke-dasharray="4.4 3.2"'} />
-  <path d="M35 14L14 34H28" fill="none" stroke="${ink}" stroke-width="${sw + 0.6}" stroke-linejoin="miter" stroke-linecap="square" />
-  <circle cx="34.5" cy="34" r="3.6" fill="${lamp}" />`;
+const TILE = 'M8 0H40L48 8V40L40 48H8L0 40V8Z';
+const EDGE = 'M8.3 0.75H39.7L47.25 8.3V39.7L39.7 47.25H8.3L0.75 39.7V8.3Z';
+const mark = ({ tile, edge, ink, shield, pub }, { sw = 4.4 } = {}) => `
+  <path d="${TILE}" fill="${tile}" />
+  <path d="${EDGE}" fill="none" stroke="${edge}" stroke-width="1.5" />
+  <g fill="none" stroke-width="${sw}" stroke-linejoin="miter">
+    <path d="M27 25L40 14" stroke="${shield}" />
+    <path d="M30 22.46L40 34" stroke="${pub}" />
+    <path d="M8 14H19L8 34H19" stroke="${ink}" stroke-linecap="square" />
+    <path d="M27 14V34" stroke="${ink}" stroke-linecap="square" />
+  </g>`;
 
-const onDark = { ink: BONE, rail: VERDIGRIS, lamp: SODIUM };
-const onLight = { ink: DARK_INK, rail: DARK_VERDIGRIS, lamp: SODIUM };
+// The tile is always dark, so the mark reads the same on light and dark pages;
+// only the wordmark flips for the light variant.
+const onDark = { tile: PANEL, edge: GRAPHITE, ink: WHITE, shield: MINT, pub: ORANGE, word: WHITE };
+const onLight = { ...onDark, word: NIGHT };
 
 /* --- 2. the wordmark ------------------------------------------------------ */
 const FONT_FILES = [400, 600, 700].map((w) => resolve(root, `scripts/fonts/Bricolage-${w}.ttf`));
@@ -66,9 +75,9 @@ function outline(text) {
   }
   return { glyphs, width: x - SIZE * TRACK };
 }
-const word = outline('ZRail');
+const word = outline('ZKRail');
 const capHeight = (bold.tables.os2.sCapHeight / bold.unitsPerEm) * SIZE;
-const descender = 6; // no descenders in "ZRail"
+const descender = 6; // no descenders in "ZKRail"
 
 /* --- 3. lockup ------------------------------------------------------------ */
 const markSize = capHeight * 1.32;
@@ -83,13 +92,13 @@ function lockupBody(colors) {
   const markY = (lockH - markSize) / 2;
   const baseline = markY + markSize / 2 + capHeight / 2;
   return `<g transform="translate(${pad.toFixed(2)} ${markY.toFixed(2)}) scale(${markScale.toFixed(4)})">${mark(colors)}</g>
-  <g transform="translate(${(pad + wordX).toFixed(2)} ${baseline.toFixed(2)})" fill="${colors.ink}">${word.glyphs
+  <g transform="translate(${(pad + wordX).toFixed(2)} ${baseline.toFixed(2)})" fill="${colors.word}">${word.glyphs
     .map((d) => `<path d="${d}"/>`)
     .join('')}</g>`;
 }
 const lockupW = lockW + pad * 2;
 const svgDoc = (body, bg) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockupW.toFixed(2)} ${lockH.toFixed(2)}" width="${lockupW.toFixed(0)}" height="${lockH.toFixed(0)}" role="img" aria-label="ZRail">
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockupW.toFixed(2)} ${lockH.toFixed(2)}" width="${lockupW.toFixed(0)}" height="${lockH.toFixed(0)}" role="img" aria-label="ZKRail">
   ${bg ? `<rect width="100%" height="100%" fill="${bg}"/>` : ''}${body}
 </svg>\n`;
 
@@ -127,10 +136,8 @@ writeFileSync(out('logo-500-transparent.png'), png(square(onDark, null), 500));
   writeFileSync(out('logo-mark-500.png'), png(svg, 500));
 }
 
-/* --- 5. favicon + app icons (solid rail: dashes smear at 16px) ------------ */
-const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="${size}" height="${size}">
-  <rect width="48" height="48" fill="${NIGHT}"/>
-  <g transform="translate(4 4) scale(0.8333)">${mark(onDark, { solidRail: true, sw: 3.8 })}</g>
+/* --- 5. favicon + app icons: the tile fills the icon, strokes a touch heavier for 16px */
+const iconSvg = (size) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="${size}" height="${size}">${mark(onDark, { sw: 5 })}
 </svg>`;
 writeFileSync(out('favicon.svg'), `${iconSvg(64)}\n`);
 writeFileSync(out('favicon-32.png'), png(iconSvg(32), 32));
@@ -142,7 +149,7 @@ writeFileSync(out('icon-512.png'), png(iconSvg(512), 512));
 writeFileSync(
   resolve(root, 'src/brand/logo-paths.ts'),
   `// Generated by scripts/build-logo.mjs - do not edit by hand.\n` +
-    `// "ZRail" outlined from Bricolage Grotesque 700, one path per glyph.\n` +
+    `// "ZKRail" outlined from Bricolage Grotesque 700, one path per glyph.\n` +
     `export const WORDMARK_GLYPHS: string[] = ${JSON.stringify(word.glyphs)};\n` +
     `export const WORDMARK_WIDTH = ${word.width.toFixed(2)};\n` +
     `export const WORDMARK_CAP = ${capHeight.toFixed(2)};\n` +
@@ -162,26 +169,26 @@ writeFileSync(
   let rails = '';
   for (let i = 0; i < 6; i += 1) {
     const y = 150 + i * 70;
-    rails += `<path d="M820 ${y}H990" stroke="${VERDIGRIS}" stroke-opacity="0.7" stroke-width="3" stroke-dasharray="14 10"/>`;
-    rails += `<path d="M990 ${y}H1200" stroke="${BONE}" stroke-opacity="0.35" stroke-width="3"/>`;
-    rails += `<circle cx="${1040 + ((i * 53) % 140)}" cy="${y}" r="6" fill="${SODIUM}"/>`;
+    rails += `<path d="M820 ${y}H990" stroke="${MINT}" stroke-opacity="0.7" stroke-width="3" stroke-dasharray="14 10"/>`;
+    rails += `<path d="M990 ${y}H1200" stroke="${WHITE}" stroke-opacity="0.3" stroke-width="3"/>`;
+    rails += `<circle cx="${1040 + ((i * 53) % 140)}" cy="${y}" r="6" fill="${ORANGE}"/>`;
   }
   const og = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <radialGradient id="lamp" cx="0.82" cy="0.18" r="0.7"><stop offset="0" stop-color="${SODIUM}" stop-opacity="0.26"/><stop offset="1" stop-color="${SODIUM}" stop-opacity="0"/></radialGradient>
-    <radialGradient id="shade" cx="0.1" cy="0.95" r="0.7"><stop offset="0" stop-color="${VERDIGRIS}" stop-opacity="0.16"/><stop offset="1" stop-color="${VERDIGRIS}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="lamp" cx="0.82" cy="0.18" r="0.7"><stop offset="0" stop-color="${ORANGE}" stop-opacity="0.24"/><stop offset="1" stop-color="${ORANGE}" stop-opacity="0"/></radialGradient>
+    <radialGradient id="shade" cx="0.1" cy="0.95" r="0.7"><stop offset="0" stop-color="${MINT}" stop-opacity="0.14"/><stop offset="1" stop-color="${MINT}" stop-opacity="0"/></radialGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="${NIGHT}"/>
   <rect width="${W}" height="${H}" fill="url(#lamp)"/>
   <rect width="${W}" height="${H}" fill="url(#shade)"/>
-  <path d="M990 110V520" stroke="${BONE}" stroke-opacity="0.18" stroke-width="1.5"/>
+  <path d="M990 110V520" stroke="${WHITE}" stroke-opacity="0.16" stroke-width="1.5"/>
   ${rails}
-  <path d="M18 18H44M18 18V44M${W - 18} 18H${W - 44}M${W - 18} 18V44M18 ${H - 18}H44M18 ${H - 18}V${H - 44}M${W - 18} ${H - 18}H${W - 44}M${W - 18} ${H - 18}V${H - 44}" stroke="${BONE}" stroke-opacity="0.35" stroke-width="1.5" fill="none"/>
+  <path d="M18 18H44M18 18V44M${W - 18} 18H${W - 44}M${W - 18} 18V44M18 ${H - 18}H44M18 ${H - 18}V${H - 44}M${W - 18} ${H - 18}H${W - 44}M${W - 18} ${H - 18}V${H - 44}" stroke="${WHITE}" stroke-opacity="0.3" stroke-width="1.5" fill="none"/>
   <g transform="translate(${X - pad * lockScale} 64) scale(${lockScale.toFixed(4)})">${lockupBody(onDark)}</g>
-  ${text('Spend in the shade.', X, 300, 60, 600, -0.03, BONE)}
-  ${text('Settle in the open.', X, 370, 60, 600, -0.03, '#a3a391')}
-  ${text('Earn it back in zZEC.', X, 440, 60, 600, -0.03, SODIUM)}
-  ${text('Shielded market, merchant checkout and zZEC payouts on Robinhood Chain', X, 520, 22, 400, 0, '#a3a391')}
+  ${text('Spend in the shade.', X, 300, 60, 600, -0.03, WHITE)}
+  ${text('Settle in the open.', X, 370, 60, 600, -0.03, GREY)}
+  ${text('Earn it back in zZEC.', X, 440, 60, 600, -0.03, ORANGE)}
+  ${text('Shielded market, merchant checkout and zZEC payouts on Robinhood Chain', X, 520, 22, 400, 0, GREY)}
 </svg>`;
   writeFileSync(out('og-image.png'), png(og, W, true));
 }

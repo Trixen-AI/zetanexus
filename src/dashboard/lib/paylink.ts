@@ -39,7 +39,7 @@ export function payPayload(c: Checkout, merchantName: string): PayPayload {
   return {
     v: 1,
     id: c.apiId ?? c.id,
-    m: merchantName || 'ZRail merchant',
+    m: merchantName || 'ZKRail merchant',
     o: c.orderRef,
     p: c.payout,
     t: c.payoutToken,

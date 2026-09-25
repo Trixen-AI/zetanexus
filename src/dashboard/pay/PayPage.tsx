@@ -36,7 +36,7 @@ function PayFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="dash-gate">
       <header className="dash-gate-bar container">
-        <Link to="/" className="nav-logo" aria-label="ZRail">
+        <Link to="/" className="nav-logo" aria-label="ZKRail">
           <Logo />
         </Link>
         <span className="chip chip--shield">
@@ -80,7 +80,7 @@ function PayBody({ p }: { p: NonNullable<ReturnType<typeof decodePay>> }) {
   useEffect(() => {
     if (!uri) return;
     let alive = true;
-    void QRCode.toDataURL(uri, { margin: 1, width: 360, color: { dark: '#0d0f12', light: '#ffffff' } }).then((u) => alive && setQr(u));
+    void QRCode.toDataURL(uri, { margin: 1, width: 360, color: { dark: '#0a0a0b', light: '#ffffff' } }).then((u) => alive && setQr(u));
     return () => {
       alive = false;
     };

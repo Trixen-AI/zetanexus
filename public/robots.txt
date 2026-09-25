@@ -1,8 +1,8 @@
-# ZRail - https://zrail.app
+# ZKRail - https://zkrail-protocol.com
 User-agent: *
 Allow: /
 # Merchant dashboard and customer payment links are private surfaces.
 Disallow: /app
 Disallow: /pay/
 
-Sitemap: https://zrail.app/sitemap.xml
+Sitemap: https://zkrail-protocol.com/sitemap.xml

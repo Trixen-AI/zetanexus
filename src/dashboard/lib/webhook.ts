@@ -31,7 +31,7 @@ export const EVENT_FOR_STATUS = {
   cancelled: 'checkout.cancelled',
 } as const;
 
-/** The body ZRail would POST for this checkout's current status. */
+/** The body ZKRail would POST for this checkout's current status. */
 export function webhookBody(c: CheckoutView) {
   const body = {
     event: EVENT_FOR_STATUS[c.status],
@@ -52,8 +52,8 @@ export function webhookBody(c: CheckoutView) {
 export async function signedCurl(url: string, secret: string, body: string) {
   const sig = await hmacHex(secret, body);
   const escaped = body.replace(/'/g, `'\\''`);
-  return `curl -X POST '${url || 'https://your-server.example/webhooks/zrail'}' \\
+  return `curl -X POST '${url || 'https://your-server.example/webhooks/zkrail'}' \\
   -H 'content-type: application/json' \\
-  -H 'x-zrail-signature: sha256=${sig}' \\
+  -H 'x-zkrail-signature: sha256=${sig}' \\
   --data '${escaped}'`;
 }
