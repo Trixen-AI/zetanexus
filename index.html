@@ -95,11 +95,14 @@
         ]
       }
     </script>
+    <!-- The fallback below is for crawlers and no-JS visitors; hide it while the app loads. -->
+    <script>document.documentElement.classList.add('js');</script>
+    <style>html{background:#0c0d0b}.js .seo-fallback{display:none}</style>
   </head>
   <body>
     <div id="root">
       <!-- Shown to crawlers and no-JS visitors; React replaces it on load. -->
-      <main style="max-width: 720px; margin: 64px auto; padding: 0 16px; font-family: system-ui, sans-serif; color: #ebe8d8; background: #0c0d0b">
+      <main class="seo-fallback" style="max-width: 720px; margin: 64px auto; padding: 0 16px; font-family: system-ui, sans-serif; color: #ebe8d8; background: #0c0d0b">
         <h1>ZRail: Spend in the shade. Settle in the open. Earn it back in zZEC.</h1>
         <p>
           Buy mobile data, AI credit and servers with shielded ZEC. Take payments that land as public receipts on Robinhood

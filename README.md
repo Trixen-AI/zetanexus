@@ -153,14 +153,17 @@ locally. Point it at a real endpoint before shipping.
 ## Deploy on Vercel
 
 `vercel.json` holds the whole setup: Vite build into `dist/`, SPA fallback (every path serves
-`index.html`, so `/app` and `/pay/...` survive a refresh), `www.zrail.app` to `zrail.app`
-redirect, security headers, one-year caching for hashed assets, and `noindex` on `/app` and `/pay`.
-Node 22 is pinned in `package.json`.
+`index.html`, so `/app` and `/pay/...` survive a refresh), security headers, one-year caching for
+hashed assets, and `noindex` on `/app` and `/pay`. Node 22 is pinned in `package.json`.
+
+The www/apex redirect lives only in Vercel's Domains settings, never in `vercel.json`: two
+redirects pointing at each other loop every `/assets` request and the app never loads.
 
 1. Vercel > Add New > Project > import `Trixen-AI/zetanexus`. Framework, build command and output
    directory are read from `vercel.json`.
 2. Add the environment variables below (Production, and Preview if you use it), then deploy.
-3. Settings > Domains: add `zrail.app` and `www.zrail.app`, then point DNS as Vercel shows.
+3. Settings > Domains: add `zrail.app` and `www.zrail.app`, then point DNS as Vercel shows. Make
+   `zrail.app` the primary (Edit `www.zrail.app` > Redirect to `zrail.app`) so it matches the canonical URL.
 4. In https://dashboard.reown.com, add `zrail.app` (and your `*.vercel.app` preview domain) to the
    project's allowed domains, or the wallet modal is refused in production.
 
