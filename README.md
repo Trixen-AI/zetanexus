@@ -154,7 +154,7 @@ locally. Point it at a real endpoint before shipping.
 
 `vercel.json` holds the whole setup: Vite build into `dist/`, SPA fallback (every path serves
 `index.html`, so `/app` and `/pay/...` survive a refresh), security headers, one-year caching for
-hashed assets, and `noindex` on `/app` and `/pay`. Node 22 is pinned in `package.json`.
+hashed assets, and `noindex` on `/app` and `/pay`. Hashed build files live under `/static`. Node 22 is pinned in `package.json`.
 
 The www/apex redirect lives only in Vercel's Domains settings, never in `vercel.json`: two
 redirects pointing at each other loop every `/assets` request and the app never loads.
