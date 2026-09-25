@@ -4,7 +4,7 @@
  * Mark : a "Z" laid as a rail inside a square-cut frame (the same notched corner
  *        the UI uses on its ticket panels). The top rail is dashed verdigris: the
  *        shielded ZEC leg, present but unreadable. The diagonal and the bottom
- *        rail are solid bone: the payment settling in public on Solana.
+ *        rail are solid bone: the payment settling in public on Robinhood Chain.
  *        A sodium lamp marks the receipt at the end of the public rail.
  * Word : "ZRail" in Bricolage Grotesque 700, outlined to <path>s.
  *
@@ -181,7 +181,7 @@ writeFileSync(
   ${text('Spend in the shade.', X, 300, 60, 600, -0.03, BONE)}
   ${text('Settle in the open.', X, 370, 60, 600, -0.03, '#a3a391')}
   ${text('Earn it back in zZEC.', X, 440, 60, 600, -0.03, SODIUM)}
-  ${text('Shielded market, merchant checkout and zZEC payouts on Solana', X, 520, 22, 400, 0, '#a3a391')}
+  ${text('Shielded market, merchant checkout and zZEC payouts on Robinhood Chain', X, 520, 22, 400, 0, '#a3a391')}
 </svg>`;
   writeFileSync(out('og-image.png'), png(og, W, true));
 }

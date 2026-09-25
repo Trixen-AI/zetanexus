@@ -55,7 +55,7 @@ function SettlePanel() {
       <CheckoutPanel />
       <div className="flow-foot">
         <p className="flow-foot-copy">
-          A merchant quotes an order, the customer pays shielded ZEC to a one-time address, and the payout lands on Solana
+          A merchant quotes an order, the customer pays shielded ZEC to a one-time address, and the payout lands on Robinhood Chain
           as a receipt anyone can look up. The panel above runs through that sequence live.
         </p>
         <Link to="/app/checkouts/new" className="btn btn--brand">

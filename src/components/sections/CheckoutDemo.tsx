@@ -14,7 +14,7 @@ const STAGES = [
   { key: 'awaiting_payment', label: 'Awaiting payment', tone: 'signal' as const, hold: 5200 },
   { key: 'confirming', label: 'Confirming on Zcash', tone: 'shield' as const, hold: 3600 },
   { key: 'funded', label: 'Shielded leg funded', tone: 'shield' as const, hold: 2600 },
-  { key: 'settled', label: 'Settled on Solana', tone: 'settle' as const, hold: 7000 },
+  { key: 'settled', label: 'Settled on Robinhood Chain', tone: 'settle' as const, hold: 7000 },
 ];
 
 const QUOTE_SECONDS = 15 * 60;
@@ -181,7 +181,7 @@ export function CheckoutPanel() {
                   </li>
                   <li>
                     <b>03</b>
-                    The merchant payout lands on Solana and the receipt appears here.
+                    The merchant payout lands on Robinhood Chain and the receipt appears here.
                   </li>
                 </ol>
               </div>

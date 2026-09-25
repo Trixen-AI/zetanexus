@@ -61,7 +61,7 @@ export function Hero() {
                 <LiveZecChip />
               </li>
               <li>
-                <AssetChip symbol="SOL" />
+                <AssetChip symbol="RHC" />
               </li>
               <li>
                 <AssetChip symbol="USDC" />
